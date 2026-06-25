@@ -1288,7 +1288,7 @@ a:hover {
         border-right: none;
         border-top: 1px solid var(--glass-border);
         padding: 5px 10px;
-        background: rgba(7, 19, 40, 0.95);
+        background: rgba(255, 255, 255, 0.9);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         border-radius: 0;
@@ -1325,6 +1325,7 @@ a:hover {
         border-top: 2px solid var(--accent);
         border-radius: 0;
         background: transparent;
+        color: var(--turquoise);
     }
     
     .user-profile {
