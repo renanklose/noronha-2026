@@ -1,0 +1,6 @@
+node_modules/
+deploy.js
+deploy-log.txt
+package.json
+package-lock.json
+.git/

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noronha 2026 🌴 Nosso Paraíso</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Leaflet Maps CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+</head>
+<body>
+
+    <!-- ================= PASSWORD SCREEN ================= -->
+    <div id="login-screen" class="login-container">
+        <div class="login-glass-card">
+            <div class="login-header">
+                <span class="icon-spin">🌴</span>
+                <h1>Noronha 2026</h1>
+                <p>Nosso guia secreto para o paraíso</p>
+            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="password"><i class="fa-solid fa-lock"></i> Senha Secreta</label>
+                    <input type="password" id="password" placeholder="Digite a senha para acessar..." required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn-primary">Acessar Nosso Guia <i class="fa-solid fa-arrow-right"></i></button>
+                <p id="login-error" class="error-msg hidden"><i class="fa-solid fa-circle-exclamation"></i> Senha incorreta, amor! Tente novamente. ❤️</p>
+            </form>
+            <div class="login-footer">
+                <p>Dica: a senha é <strong>noronha2026</strong> 😉</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MAIN SITE CONTENT ================= -->
+    <div id="main-content" class="dashboard-container hidden">
+        <!-- Sidebar Navigation (Desktop) / Bottom Nav (Mobile) -->
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-umbrella-beach"></i>
+                <h2>Noronha <span>2026</span></h2>
+            </div>
+            <nav class="nav-links">
+                <button class="nav-btn active" data-tab="tab-dashboard">
+                    <i class="fa-solid fa-chart-line"></i> <span>Resumo</span>
+                </button>
+                <button class="nav-btn" data-tab="tab-lodging">
+                    <i class="fa-solid fa-hotel"></i> <span>Hospedagem</span>
+                </button>
+                <button class="nav-btn" data-tab="tab-spots">
+                    <i class="fa-solid fa-compass"></i> <span>Praias & Spots</span>
+                </button>
+                <button class="nav-btn" data-tab="tab-itinerary">
+                    <i class="fa-solid fa-calendar-days"></i> <span>Roteiro</span>
+                </button>
+                <button class="nav-btn" data-tab="tab-map">
+                    <i class="fa-solid fa-map-location-dot"></i> <span>Mapa</span>
+                </button>
+                <button class="nav-btn" data-tab="tab-checklist">
+                    <i class="fa-solid fa-clipboard-list"></i> <span>Checklist</span>
+                </button>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar"><i class="fa-solid fa-heart"></i></div>
+                <div class="user-info">
+                    <p class="name">Nós no Paraíso</p>
+                    <p class="sub">10/07 - 16/07</p>
+                </div>
+                <button id="btn-logout" title="Sair"><i class="fa-solid fa-right-from-bracket"></i></button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <!-- Header with Countdown -->
+            <header class="main-header">
+                <div class="welcome-text">
+                    <h1>Olá, casal! 🌊</h1>
+                    <p>Prontos para viver Fernando de Noronha?</p>
+                </div>
+                <!-- Countdown Widget -->
+                <div class="countdown-widget">
+                    <div class="countdown-title"><i class="fa-solid fa-clock-rotate-left"></i> Contagem Regressiva</div>
+                    <div id="countdown" class="countdown-timer">
+                        <div class="time-block">
+                            <span id="days">00</span>
+                            <small>Dias</small>
+                        </div>
+                        <div class="time-block">
+                            <span id="hours">00</span>
+                            <small>Horas</small>
+                        </div>
+                        <div class="time-block">
+                            <span id="minutes">00</span>
+                            <small>Min</small>
+                        </div>
+                        <div class="time-block">
+                            <span id="seconds">00</span>
+                            <small>Seg</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- ================= TAB: DASHBOARD (RESUMO) ================= -->
+            <section id="tab-dashboard" class="tab-content active">
+                <div class="grid-layout">
+                    <!-- Quick Stats Card -->
+                    <div class="glass-card summary-card">
+                        <h3><i class="fa-solid fa-calendar-check"></i> Resumo da Viagem</h3>
+                        <div class="summary-details">
+                            <div class="detail-item">
+                                <span class="label">Período:</span>
+                                <span class="value">10 a 16 de Julho de 2026</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Duração:</span>
+                                <span class="value">6 Noites (Alta Temporada)</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Hospedagem:</span>
+                                <span class="value">Pousada Maresia (Remédios)</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Transfer Aeroporto:</span>
+                                <span class="value success-badge"><i class="fa-solid fa-circle-check"></i> Incluso ida e volta</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weather / Island Tip Card -->
+                    <div class="glass-card status-card">
+                        <h3><i class="fa-solid fa-sun"></i> Status & Clima</h3>
+                        <div class="weather-mock">
+                            <div class="weather-now">
+                                <i class="fa-solid fa-cloud-sun weather-icon"></i>
+                                <div>
+                                    <span class="temp">29°C</span>
+                                    <span class="desc">Ensolarado c/ brisa leve</span>
+                                </div>
+                            </div>
+                            <div class="weather-forecast">
+                                <div><small>Sex 10/07</small><i class="fa-solid fa-sun"></i><span>29°</span></div>
+                                <div><small>Sáb 11/07</small><i class="fa-solid fa-sun"></i><span>30°</span></div>
+                                <div><small>Dom 12/07</small><i class="fa-solid fa-cloud-sun"></i><span>28°</span></div>
+                            </div>
+                        </div>
+                        <div class="tide-alert">
+                            <p><i class="fa-solid fa-water"></i> <strong>Atenção às marés:</strong> Sempre verifique a tábua de marés antes de ir para a <strong>Baía dos Porcos</strong> ou <strong>Sancho</strong>! O mergulho e o acesso ficam perfeitos com maré baixa.</p>
+                            <a href="https://www.parnanoronha.com.br/t%C3%A1bua-de-mar%C3%A9" target="_blank" class="btn-link">Ver Tábua de Marés Oficial <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Checklist Progress Card -->
+                    <div class="glass-card progress-card">
+                        <h3><i class="fa-solid fa-list-check"></i> Progresso do Checklist</h3>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" id="checklist-progress" style="width: 0%"></div>
+                        </div>
+                        <p class="progress-text" id="checklist-progress-text">Carregando itens...</p>
+                        <p class="help-text">Vá na aba <strong>Checklist</strong> para marcar o que já está na mala e garantir que não falte nada!</p>
+                    </div>
+
+                    <!-- Special Event Banner -->
+                    <div class="glass-card highlight-card">
+                        <div class="highlight-content">
+                            <span class="badge-new">Destaque Especial 🌝</span>
+                            <h3>Nascer da Lua Cheia</h3>
+                            <p>No dia <strong>14 de Julho (Terça-feira)</strong> teremos o maravilhoso Nascer da Lua Cheia. O melhor ponto para ver é no <strong>Museu dos Tubarões</strong> durante o Festival da Lua Cheia!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= TAB: LODGING (HOSPEDAGEM) ================= -->
+            <section id="tab-lodging" class="tab-content">
+                <div class="glass-card hotel-details-card">
+                    <div class="hotel-header">
+                        <div class="hotel-title">
+                            <span class="category-badge">Pousada Reservada</span>
+                            <h2>Pousada Maresia</h2>
+                            <p class="address"><i class="fa-solid fa-location-dot"></i> Vila dos Remédios (Rua Amaro Preto, 480) - Fernando de Noronha</p>
+                        </div>
+                        <div class="hotel-price">
+                            <span class="price-label">Valor Total</span>
+                            <span class="price-val">R$ 3.201,54</span>
+                            <span class="price-info">6 noites · Alta Temporada</span>
+                        </div>
+                    </div>
+
+                    <div class="grid-2-cols">
+                        <div class="info-block">
+                            <h3><i class="fa-solid fa-circle-info"></i> Dados da Reserva</h3>
+                            <div class="booking-data">
+                                <div class="data-row">
+                                    <span>Nº da Reserva:</span>
+                                    <div class="copy-box">
+                                        <strong id="reserva-num">5007217316</strong>
+                                        <button class="btn-copy" onclick="copyText('reserva-num', 'Nº da Reserva copiado!')" title="Copiar"><i class="fa-regular fa-copy"></i></button>
+                                    </div>
+                                </div>
+                                <div class="data-row">
+                                    <span>Código PIN:</span>
+                                    <div class="copy-box">
+                                        <strong id="pin-code">4776</strong>
+                                        <button class="btn-copy" onclick="copyText('pin-code', 'PIN copiado!')" title="Copiar"><i class="fa-regular fa-copy"></i></button>
+                                    </div>
+                                </div>
+                                <div class="data-row">
+                                    <span>Check-in:</span>
+                                    <span>Sexta, 10 Jul. 2026 (14:00 às 17:00)</span>
+                                </div>
+                                <div class="data-row">
+                                    <span>Check-out:</span>
+                                    <span>Quinta, 16 Jul. 2026 (08:00 às 12:00)</span>
+                                </div>
+                            </div>
+                            <div class="btn-group">
+                                <a href="https://secure.booking.com/app_link/myreservations.html?pbsource=booking_confirmation&bn=5007217316" target="_blank" class="btn-primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Acessar Reserva no Booking</a>
+                                <a href="https://www.booking.com/Share-hW6CU0" target="_blank" class="btn-secondary">Link da Acomodação</a>
+                            </div>
+                        </div>
+
+                        <div class="info-block">
+                            <h3><i class="fa-solid fa-map-location-dot"></i> Localização & Benefícios</h3>
+                            <ul class="benefits-list">
+                                <li>
+                                    <i class="fa-solid fa-van-shuttle"></i>
+                                    <div>
+                                        <strong>Transfer Incluso</strong>
+                                        <p>A pousada inclui o transfer de chegada e volta do Aeroporto de Noronha! ✈️</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-person-hiking"></i>
+                                    <div>
+                                        <strong>Centro Histórico (Vila dos Remédios)</strong>
+                                        <p>A pé no centro: Fica a apenas 2 a 4 minutos de caminhada da praça principal.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                    <div>
+                                        <strong>Infraestrutura Próxima</strong>
+                                        <p>Mercados locais, mercearias, farmácia, caixas eletrônicos (ATM) e ampla variedade de restaurantes (de lanchonetes a jantares premium).</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= TAB: BEACHES & SPOTS (PRAIAS & SPOTS) ================= -->
+            <section id="tab-spots" class="tab-content">
+                <div class="section-intro">
+                    <h2>Praias e Pontos de Noronha</h2>
+                    <p>Filtre os melhores lugares da ilha, acompanhe o que queremos fazer e marque o que já visitamos!</p>
+                </div>
+
+                <div class="filter-bar">
+                    <button class="filter-btn active" data-filter="all">Todas</button>
+                    <button class="filter-btn" data-filter="snorkel"><i class="fa-solid fa-mask-snorkel"></i> Snorkel</button>
+                    <button class="filter-btn" data-filter="sunset"><i class="fa-solid fa-regular fa-sun"></i> Pôr do Sol</button>
+                    <button class="filter-btn" data-filter="sunrise"><i class="fa-solid fa-sun"></i> Nascer do Sol</button>
+                    <button class="filter-btn" data-filter="special"><i class="fa-solid fa-star"></i> Especiais</button>
+                </div>
+
+                <div class="spots-grid" id="spots-container">
+                    <!-- Cards will be dynamically injected here for better interaction/visit tracking -->
+                </div>
+            </section>
+
+            <!-- ================= TAB: ITINERARY (ROTEIRO DIÁRIO) ================= -->
+            <section id="tab-itinerary" class="tab-content">
+                <div class="section-intro">
+                    <h2>Nosso Roteiro de 7 Dias 🌴</h2>
+                    <p>Planejamento sugerido dia-a-dia para aproveitarmos ao máximo.</p>
+                </div>
+
+                <!-- Daily Selector -->
+                <div class="day-selector">
+                    <button class="day-btn active" data-day="1"><strong>10/07</strong><span>Dia 1</span></button>
+                    <button class="day-btn" data-day="2"><strong>11/07</strong><span>Dia 2</span></button>
+                    <button class="day-btn" data-day="3"><strong>12/07</strong><span>Dia 3</span></button>
+                    <button class="day-btn" data-day="4"><strong>13/07</strong><span>Dia 4</span></button>
+                    <button class="day-btn" data-day="5"><strong>14/07</strong><span>Dia 5</span></button>
+                    <button class="day-btn" data-day="6"><strong>15/07</strong><span>Dia 6</span></button>
+                    <button class="day-btn" data-day="7"><strong>16/07</strong><span>Dia 7</span></button>
+                </div>
+
+                <!-- Itinerary Cards -->
+                <div id="itinerary-details">
+                    <!-- Day content will be loaded dynamically based on active day -->
+                </div>
+            </section>
+
+            <!-- ================= TAB: CHECKLIST ================= -->
+            <section id="tab-checklist" class="tab-content">
+                <div class="section-intro">
+                    <h2>Nossa Checklist de Viagem 🎒</h2>
+                    <p>Adicione, marque e gerencie os itens para a nossa mala e providências importantes.</p>
+                </div>
+
+                <div class="checklist-wrapper">
+                    <!-- Form to add new item -->
+                    <form id="checklist-form" class="add-item-form">
+                        <input type="text" id="checklist-input" placeholder="O que mais precisamos levar/fazer?" required maxlength="50">
+                        <select id="checklist-category">
+                            <option value="Mala">Mala</option>
+                            <option value="Documentos">Docs & Apps</option>
+                            <option value="Providências">Providências</option>
+                            <option value="Outros">Outros</option>
+                        </select>
+                        <button type="submit" class="btn-primary"><i class="fa-solid fa-plus"></i></button>
+                    </form>
+
+                    <!-- Checklist Sections -->
+                    <div class="checklist-columns">
+                        <div class="checklist-section">
+                            <h3><i class="fa-solid fa-suitcase"></i> Na Mala</h3>
+                            <ul class="todo-list" id="list-mala"></ul>
+                        </div>
+                        <div class="checklist-section">
+                            <h3><i class="fa-solid fa-file-invoice"></i> Docs & Apps</h3>
+                            <ul class="todo-list" id="list-docs"></ul>
+                        </div>
+                        <div class="checklist-section">
+                            <h3><i class="fa-solid fa-circle-exclamation"></i> Providências</h3>
+                            <ul class="todo-list" id="list-providencias"></ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= TAB: MAP ================= -->
+            <section id="tab-map" class="tab-content">
+                <div class="section-intro">
+                    <h2>Mapa Interativo de Noronha 🗺️</h2>
+                    <p>Explore as principais praias, trilhas e pontos de interesse da ilha em tempo real!</p>
+                </div>
+                
+                <div class="glass-card map-wrapper" style="padding: 15px; margin-bottom: 24px;">
+                    <div id="map" style="height: 520px; width: 100%; border-radius: 12px; z-index: 1;"></div>
+                </div>
+
+                <div class="grid-layout">
+                    <!-- Rules Card -->
+                    <div class="glass-card">
+                        <h3><i class="fa-solid fa-circle-exclamation"></i> Regras da Ilha (ICMBio)</h3>
+                        <ul class="benefits-list" style="gap: 15px; list-style: none; padding-left: 0;">
+                            <li style="display: flex; gap: 15px; align-items: flex-start;">
+                                <i class="fa-solid fa-ticket" style="font-size: 1rem; width: 38px; height: 38px; background: rgba(224, 176, 122, 0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--accent); flex-shrink: 0;"></i>
+                                <div>
+                                    <strong>Ingresso do Parque (ParNA)</strong>
+                                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Obrigatório para acessar o Sancho, Baía dos Porcos (mirante) e Praia do Leão. Compre online ou no quiosque da Vila dos Remédios.</p>
+                                </div>
+                            </li>
+                            <li style="display: flex; gap: 15px; align-items: flex-start;">
+                                <i class="fa-solid fa-ban" style="font-size: 1rem; width: 38px; height: 38px; background: rgba(255,107,74,0.15); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--sunset); flex-shrink: 0;"></i>
+                                <div>
+                                    <strong>Mergulho no Sancho</strong>
+                                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Mergulho livre é sem colete! É terminantemente proibido pisar nos corais ou tocar nos animais. Use camisas de Lycra em vez de protetor solar comum na água.</p>
+                                </div>
+                            </li>
+                            <li style="display: flex; gap: 15px; align-items: flex-start;">
+                                <i class="fa-solid fa-trash-can" style="font-size: 1rem; width: 38px; height: 38px; background: rgba(224, 176, 122, 0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--accent); flex-shrink: 0;"></i>
+                                <div>
+                                    <strong>Lixo Zero nas Praias</strong>
+                                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Não há lixeiras nas praias do Parque. Lembre-se de levar uma sacolinha e trazer todo o seu lixo de volta com você.</p>
+                                </div>
+                            </li>
+                            <li style="display: flex; gap: 15px; align-items: flex-start;">
+                                <i class="fa-solid fa-clock" style="font-size: 1rem; width: 38px; height: 38px; background: rgba(224, 176, 122, 0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--accent); flex-shrink: 0;"></i>
+                                <div>
+                                    <strong>Horários da Escada do Sancho</strong>
+                                    <p style="font-size: 0.85rem; color: var(--text-secondary);">O acesso vertical nas fendas das rochas tem horários específicos de descida e subida para evitar gargalos.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Trails Info Card -->
+                    <div class="glass-card">
+                        <h3><i class="fa-solid fa-route"></i> Trilhas Ativas</h3>
+                        <div class="summary-details">
+                            <div class="detail-item" style="flex-direction: column; align-items: flex-start; gap: 4px; padding-bottom: 12px; border-bottom: 1px dashed rgba(255,255,255,0.05);">
+                                <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                                    <strong style="color: var(--accent);"><i class="fa-solid fa-person-walking"></i> Trilha do Sancho</strong>
+                                    <span class="success-badge" style="background: rgba(16, 185, 129, 0.15); color: var(--emerald); font-size: 0.75rem;">Fácil (Passarela)</span>
+                                </div>
+                                <p style="font-size: 0.8rem; color: var(--text-secondary);">Passarelas suspensas de madeira ligando o Centro de Visitantes até os mirantes do Sancho e da Baía dos Porcos.</p>
+                            </div>
+                            <div class="detail-item" style="flex-direction: column; align-items: flex-start; gap: 4px; padding-bottom: 12px; border-bottom: 1px dashed rgba(255,255,255,0.05);">
+                                <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                                    <strong style="color: var(--sunset);"><i class="fa-solid fa-mountain"></i> Trilha do Piquinho</strong>
+                                    <span class="success-badge" style="background: rgba(224, 176, 122, 0.15); color: var(--accent); font-size: 0.75rem;">Moderada</span>
+                                </div>
+                                <p style="font-size: 0.8rem; color: var(--text-secondary);">Caminhada na mata com uma subida de pedras no trecho final. Recompensa com uma incrível vista de 360° do pôr do sol.</p>
+                            </div>
+                            <div class="detail-item" style="flex-direction: column; align-items: flex-start; gap: 4px; padding-bottom: 12px;">
+                                <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                                    <strong style="color: var(--emerald);"><i class="fa-solid fa-shoe-prints"></i> Trilha da Baía dos Porcos</strong>
+                                    <span class="success-badge" style="background: rgba(16, 185, 129, 0.15); color: var(--emerald); font-size: 0.75rem;">Curta (Pedras)</span>
+                                </div>
+                                <p style="font-size: 0.8rem; color: var(--text-secondary);">Acesso rápido de 5 minutos sobre rochas vulcânicas a partir do canto esquerdo da Cacimba do Padre.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden">Copiado para a área de transferência!</div>
+
+    <!-- Background overlay elements for tropical aesthetic -->
+    <div class="bg-blur bg-blur-1"></div>
+    <div class="bg-blur bg-blur-2"></div>
+
+    <!-- Leaflet Maps JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
