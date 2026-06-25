@@ -12,48 +12,55 @@ document.addEventListener("DOMContentLoaded", () => {
     const loginError = document.getElementById("login-error");
     const passwordInput = document.getElementById("password");
 
-    loginForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const inputPass = passwordInput.value.trim().toLowerCase();
+    if (loginForm) {
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const inputPass = passwordInput.value.trim().toLowerCase();
 
-        if (inputPass === CORRECT_PASSWORD) {
-            sessionStorage.setItem("noronha_auth", "true");
-            loginError.classList.add("hidden");
-            
-            // Nice fade transition
-            const loginScreen = document.getElementById("login-screen");
-            loginScreen.style.opacity = "0";
-            loginScreen.style.transition = "opacity 0.5s ease";
-            
-            setTimeout(() => {
-                showDashboard();
-            }, 450);
-        } else {
-            loginError.classList.remove("hidden");
-            passwordInput.value = "";
-            passwordInput.focus();
-        }
-    });
+            if (inputPass === CORRECT_PASSWORD) {
+                sessionStorage.setItem("noronha_auth", "true");
+                loginError.classList.add("hidden");
+                
+                // Transition effect
+                const loginScreen = document.getElementById("login-screen");
+                loginScreen.style.opacity = "0";
+                loginScreen.style.transition = "opacity 0.4s ease";
+                
+                setTimeout(() => {
+                    showDashboard();
+                }, 400);
+            } else {
+                loginError.classList.remove("hidden");
+                passwordInput.value = "";
+                passwordInput.focus();
+            }
+        });
+    }
 
     // Logout Action
-    document.getElementById("btn-logout").addEventListener("click", () => {
-        sessionStorage.removeItem("noronha_auth");
-        window.location.reload();
-    });
+    const logoutBtn = document.getElementById("btn-logout");
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+            sessionStorage.removeItem("noronha_auth");
+            window.location.reload();
+        });
+    }
 
     // Initialize all app components
     initApp();
 });
 
 function showDashboard() {
-    document.getElementById("login-screen").classList.add("hidden");
+    const loginScreen = document.getElementById("login-screen");
+    if (loginScreen) loginScreen.classList.add("hidden");
+    
     const mainContent = document.getElementById("main-content");
-    mainContent.classList.remove("hidden");
-    mainContent.style.opacity = "0";
-    setTimeout(() => {
-        mainContent.style.opacity = "1";
-        mainContent.style.transition = "opacity 0.6s ease";
-    }, 50);
+    if (mainContent) {
+        mainContent.classList.remove("hidden");
+        setTimeout(() => {
+            mainContent.classList.add("visible");
+        }, 50);
+    }
 }
 
 
@@ -62,170 +69,217 @@ function showDashboard() {
 // Noronha Beaches and Spots
 const SPOTS_DATA = [
     {
+        id: "lodging",
+        name: "Pousada Maresia 🏨",
+        coords: [-3.8415, -32.4124],
+        description: "Nossa pousada charmosa na Vila dos Remédios. Localização espetacular: pertinho da praça principal, mercados, farmácias e ótimos restaurantes. Ar-condicionado, Wi-Fi e um café da manhã delicioso para recarregar as energias.",
+        tags: ["special"],
+        tip: "O transfer gratuito de ida/volta para o aeroporto está incluído! Lembre-se de confirmar o horário de pouso com eles.",
+        icon: "fa-solid fa-hotel",
+        color: "marker-lodging"
+    },
+    {
         id: "sancho",
-        name: "Praia do Sancho",
-        description: "Considerada uma das praias mais bonitas do mundo. Acesso por escada vertical estreita entre rochas. Ideal para mergulho livre (sem coletes!). Fique atento aos ninhos de Atobá-de-pé-vermelho nas árvores.",
+        name: "Praia do Sancho 🌊",
+        coords: [-3.8546, -32.4431],
+        description: "Considerada múltiplas vezes a praia mais bonita do mundo. Cercada por falésias majestosas, com água cristalina cor de esmeralda. O acesso é feito descendo escadas de metal encravadas na rocha.",
         tags: ["snorkel", "special"],
-        tip: "Verifique os horários permitidos de descida/subida e a maré."
+        tip: "Consulte a tábua de marés. É obrigatório o uso de coletes salva-vidas em algumas áreas e há horários específicos para descer/subir as escadas.",
+        icon: "fa-solid fa-umbrella-beach",
+        color: "marker-special"
     },
     {
         id: "porcos",
-        name: "Baía dos Porcos",
-        description: "Melhor ponto de mergulho livre (snorkel) da ilha. Águas cristalinas e calmas em maré baixa, ideal para ver tartarugas e peixes. Fica ao lado da Cacimba do Padre.",
+        name: "Baía dos Porcos 🐠",
+        coords: [-3.8504, -32.4339],
+        description: "Uma jóia selvagem e rochosa. Forma piscinas naturais incríveis na maré baixa. Um dos melhores pontos de mergulho livre (snorkel) da ilha para nadar com peixes coloridos e tartarugas.",
         tags: ["snorkel", "special"],
-        tip: "Acesso por uma trilha curta de pedras a partir do lado esquerdo da Cacimba."
+        tip: "Acesso por uma pequena trilha de pedras a partir do canto esquerdo da praia da Cacimba do Padre. Vá de sapatilha de neoprene!",
+        icon: "fa-solid fa-mask-snorkel",
+        color: "marker-special"
     },
     {
         id: "cacimba",
-        name: "Praia da Cacimba do Padre",
-        description: "Palco de grandes campeonatos de surf. Abriga o icônico Morro Dois Irmãos. Excelente ponto de banho e snorkel em épocas de mar calmo.",
+        name: "Cacimba do Padre 🏝️",
+        coords: [-3.8497, -32.4312],
+        description: "Praia de areia fofa e o clássico cartão-postal com vista direta para o Morro Dois Irmãos. No verão é palco de campeonatos de surfe com ondas gigantes, no inverno de julho as águas costumam ser bem mais mansas.",
         tags: ["snorkel"],
-        tip: "Lugar clássico para fotos perfeitas do Morro Dois Irmãos."
+        tip: "Ponto perfeito para fotos na areia com os 'Dois Irmãos' ao fundo ao entardecer.",
+        icon: "fa-solid fa-umbrella-beach",
+        color: "marker-default"
     },
     {
         id: "porto",
-        name: "Praia do Porto",
-        description: "Lugar super movimentado com muita vida marinha (raias, tartarugas e tubarões). Fica bem perto do Naufrágio do navio grego, onde dá para ir nadando com snorkel.",
+        name: "Praia do Porto ⚓",
+        coords: [-3.8347, -32.4035],
+        description: "Área de ancoragem das embarcações com rica vida marinha. Excelente para fazer snorkel perto do Naufrágio do Navio Grego, onde costumam aparecer raias chitas, tartarugas e tubarões.",
         tags: ["snorkel"],
-        tip: "Dá para alugar bike aquática ou fazer passeio de canoa havaiana aqui."
+        tip: "Dá para alugar caiaque, stand-up paddle ou fazer o famoso passeio de canoa havaiana aqui logo cedo.",
+        icon: "fa-solid fa-anchor",
+        color: "marker-default"
     },
     {
         id: "leao",
-        name: "Praia do Leão",
-        description: "Praia de mar aberto, selvagem e belíssima. É o principal ponto de desova das tartarugas marinhas na ilha. Excelente para contemplação.",
+        name: "Praia do Leão 🐢",
+        coords: [-3.8647, -32.4330],
+        description: "Lado mar de fora. Praia de beleza selvagem, de areia avermelhada e cercada por duas grandes rochas (o Leão e a Viuvinha). É o principal berçário e local de desova das tartarugas marinhas na ilha.",
         tags: ["special"],
-        tip: "Cuidado com as correntes se for entrar na água."
+        tip: "Correntes muito fortes. Evite entrar no fundo do mar, prefira caminhar pela areia e contemplar os ninhos marcados pelo Projeto Tamar.",
+        icon: "fa-solid fa-shield-halved",
+        color: "marker-special"
     },
     {
         id: "conceicao",
-        name: "Praia da Conceição",
-        description: "Praia extensa com o Morro do Pico ao fundo. O lado direito (perto do morro de fora) possui um excelente ponto de snorkel com bastante peixes.",
+        name: "Praia da Conceição 🌅",
+        coords: [-3.8427, -32.4172],
+        description: "Grande faixa de areia sob a imponência do Morro do Pico. Um dos pontos mais badalados da ilha, com quadras de futevôlei e o Bar do Meio nas proximidades. Excelentes mergulhos nas pedras do canto direito.",
         tags: ["snorkel", "sunset"],
-        tip: "Perfeito para passar a tarde e assistir ao pôr do sol."
+        tip: "Perfeito para estender a canga no final da tarde e ver o sol se esconder ao lado do Morro do Pico.",
+        icon: "fa-solid fa-sun",
+        color: "marker-sunset"
     },
     {
         id: "museu-tubaroes",
-        name: "Museu dos Tubarões",
-        description: "Excelente mirante e museu. Em julho, com a lua cheia, teremos o Festival da Lua Cheia (especialmente no dia 14/07).",
+        name: "Museu dos Tubarões 🌝",
+        coords: [-3.8322, -32.4005],
+        description: "Um museu interessante sobre a fauna marinha da ilha e um mirante gramado lindíssimo. Na maré baixa, dá para avistar tubarões limpando-se no raso da baía logo abaixo (Enseada dos Cações).",
         tags: ["sunrise", "special"],
-        tip: "Ponto imperdível para ver o Nascer da Lua Cheia! 🌝"
-    },
-    {
-        id: "capelinha",
-        name: "Capelinha de São Pedro",
-        description: "Localizado no alto, próximo ao porto. Oferece uma vista panorâmica incrível de toda a baía do porto.",
-        tags: ["sunrise"],
-        tip: "Ponto espetacular para ver o nascer do sol."
-    },
-    {
-        id: "air-france",
-        name: "Ponta do Air France",
-        description: "Local histórico onde as águas do mar de dentro e mar de fora se encontram.",
-        tags: ["sunrise"],
-        tip: "Muito indicado para ver o amanhecer ou iniciar passeios de canoa."
+        tip: "Nosso passeio obrigatório na noite de 14 de Julho para ver o nascer da deslumbrante Lua Cheia sobre o mar! 🌝",
+        icon: "fa-solid fa-moon",
+        color: "marker-special"
     },
     {
         id: "forte-boldro",
-        name: "Mirante do Forte do Boldró",
-        description: "O ponto mais famoso e tradicional da ilha para assistir ao pôr do sol, com vista privilegiada do Morro Dois Irmãos.",
+        name: "Mirante do Forte do Boldró 🌇",
+        coords: [-3.8490, -32.4280],
+        description: "Ruínas de uma antiga fortificação no alto de uma falésia. É o ponto mais tradicional, romântico e concorrido da ilha para assistir ao pôr do sol clássico de Noronha.",
         tags: ["sunset", "special"],
-        tip: "Chegue cedo para pegar um bom lugar. Costuma lotar!"
+        tip: "Chegue uns 30 a 40 minutos antes do sol se pôr para conseguir um bom espaço e tirar fotos incríveis com o Morro Dois Irmãos alinhado.",
+        icon: "fa-solid fa-sun",
+        color: "marker-sunset"
+    },
+    {
+        id: "capelinha",
+        name: "Capelinha de São Pedro ⛪",
+        coords: [-3.8335, -32.4015],
+        description: "Pequena e charmosa capela localizada no alto do Porto de Santo Antônio. Oferece uma perspectiva aérea incrível da baía, dos barcos flutuando e do oceano.",
+        tags: ["sunrise"],
+        tip: "Ponto super pacífico e bonito para assistir ao nascer do sol.",
+        icon: "fa-solid fa-church",
+        color: "marker-default"
+    },
+    {
+        id: "air-france",
+        name: "Ponta do Air France ⛵",
+        coords: [-3.8300, -32.4000],
+        description: "Local histórico onde ficava a base da companhia aérea francesa na década de 30. Fica no extremo norte da ilha, onde o Mar de Dentro encontra o bravio Mar de Fora.",
+        tags: ["sunrise"],
+        tip: "Ótimo ponto para observar o nascer do sol e sentir o vento forte do oceano.",
+        icon: "fa-solid fa-compass",
+        color: "marker-default"
     },
     {
         id: "bode",
-        name: "Praia do Bode",
-        description: "Praia tranquila e menos movimentada, vizinha da Cacimba do Padre.",
+        name: "Praia do Bode 🌅",
+        coords: [-3.8480, -32.4290],
+        description: "Praia de mar calmo na maré baixa, vizinha da Cacimba do Padre. Possui poços de pedra ótimos para banho e é muito procurada para quem quer sossego.",
         tags: ["sunset"],
-        tip: "Ótimo refúgio para ver o pôr do sol em silêncio."
+        tip: "Uma ótima alternativa para fugir do agito e curtir o pôr do sol em silêncio.",
+        icon: "fa-solid fa-umbrella-beach",
+        color: "marker-sunset"
     },
     {
         id: "boldro-praia",
-        name: "Praia do Boldró",
-        description: "Praia de pedras e piscinas naturais que surgem na maré baixa. Abriga o mirante no topo da falésia.",
+        name: "Praia do Boldró 🌅",
+        coords: [-3.8465, -32.4260],
+        description: "Praia charmosa com piscinas naturais de recifes vulcânicos que se revelam na maré seca. Fica aos pés do famoso Mirante do Forte.",
         tags: ["sunset"],
-        tip: "Ótimo local para relaxar no fim de tarde."
+        tip: "Na maré baixa, caminhar entre as rochas e ver peixes ornamentais aprisionados nas pequenas poças.",
+        icon: "fa-solid fa-umbrella-beach",
+        color: "marker-sunset"
     }
 ];
 
 // Daily Itinerary
 const ITINERARY_DATA = {
     1: {
-        title: "Dia 1: Chegada & Boas-Vindas",
-        date: "Sexta-feira, 10 de Julho",
+        title: "Dia 1: Chegada & Pôr do Sol",
+        date: "Sexta-feira, 10 de Julho de 2026",
         badge: "Chegada",
         timeline: [
-            { time: "Tarde", title: "Chegada no Aeroporto ✈️", desc: "Desembarque no aeroporto de Noronha. O transfer da Pousada Maresia estará nos aguardando para nos levar à pousada.", highlight: true },
-            { time: "14:00 - 17:00", title: "Check-in na Pousada Maresia 🏨", desc: "Instalação no quarto na Vila dos Remédios, organização das malas e descanso da viagem." },
-            { time: "Final da Tarde", title: "Caminhada pela Vila dos Remédios 🚶‍♂️🚶‍♀️", desc: "Reconhecimento rápido do centro (caixas eletrônicos, farmácia, mercados) e caminhada até a Praia do Cachorro ou Praia do Meio." },
-            { time: "17:30", title: "Pôr do sol na Praia da Conceição 🌅", desc: "Nossa primeira recepção com o pôr do sol clássico de Noronha aos pés do Morro do Pico." },
-            { time: "Noite", title: "Jantar na Vila dos Remédios 🍽️", desc: "Escolha de um restaurante aconchegante no centrinho (fica a 2-4 min a pé da nossa pousada)." }
+            { time: "Tarde", title: "Pouso em Noronha! ✈️", desc: "Desembarque no paraíso e pagamento da taxa ambiental (se não feita online). O transfer gratuito da Pousada Maresia estará nos esperando no aeroporto.", highlight: true },
+            { time: "14:00 - 17:00", title: "Check-in na Pousada Maresia 🏨", desc: "Instalação na pousada na Vila dos Remédios, guardar as malas, trocar de roupa e aplicar protetor solar." },
+            { time: "16:00", title: "Reconhecimento da Vila 🚶‍♂️🚶‍♀️", desc: "Caminhada rápida pelo centrinho histórico (mercados, farmácias, restaurantes) que fica bem próximo de nós." },
+            { time: "17:15", title: "Pôr do sol na Praia da Conceição 🌅", desc: "Primeiro pôr do sol inesquecível ao pé do gigante Morro do Pico, sentindo a energia da ilha." },
+            { time: "Noite", title: "Jantar na Vila dos Remédios 🍽️", desc: "Comemoração de chegada em um dos charmosos restaurantes da praça principal." }
         ]
     },
     2: {
-        title: "Dia 2: Mar de Dentro & Naufrágio",
-        date: "Sábado, 11 de Julho",
-        badge: "Aventura Aquática",
+        title: "Dia 2: Mergulho no Porto & Forte Boldró",
+        date: "Sábado, 11 de Julho de 2026",
+        badge: "Snorkel",
         timeline: [
-            { time: "08:00", title: "Café da manhã na Pousada ☕", desc: "Carregar as energias para o primeiro dia completo de exploração." },
-            { time: "09:00", title: "Praia do Porto - Snorkel & Naufrágio 🤿", desc: "Mergulho de snorkel na Praia do Porto. Vamos procurar tartarugas, raias e ir nadando até o Naufrágio do Navio Grego! Possibilidade de alugar bike aquática ou fazer passeio de canoa havaiana.", highlight: true },
-            { time: "Almoço", title: "Restaurante próximo ao Porto 🐟", desc: "Aproveitar peixe fresco local nos quiosques ou restaurantes da região do porto." },
-            { time: "Tarde", title: "Praia da Conceição (Lado Direito)", desc: "Mergulho de snorkel no lado direito, próximo ao Morro de Fora, explorando a rica vida marinha costeira." },
-            { time: "17:00", title: "Pôr do sol no Mirante do Forte do Boldró 🌇", desc: "Ir para as ruínas do Forte do Boldró para assistir ao pôr do sol mais tradicional da ilha com vista para o Morro Dois Irmãos." }
+            { time: "08:00", title: "Café da manhã na Pousada ☕", desc: "Café reforçado para aguentar o dia na água." },
+            { time: "09:00", title: "Snorkel na Praia do Porto 🤿", desc: "Mergulho nas águas calmas do porto. Vamos nadar até o Naufrágio do Navio Grego, lar de tartarugas e raias!", highlight: true },
+            { time: "Almoço", title: "Quiosque do Porto 🐟", desc: "Almoçar peixe fresco grelhado à beira-mar." },
+            { time: "Tarde", title: "Praia da Conceição (Canto das Pedras)", desc: "Mergulhar nas piscinas do canto direito da Conceição e relaxar sob as sombras." },
+            { time: "17:00", title: "Pôr do sol no Forte do Boldró 🌇", desc: "Subir até as ruínas do forte para contemplar o pôr do sol clássico de Noronha, com o Dois Irmãos em destaque." }
         ]
     },
     3: {
-        title: "Dia 3: O Cartão Postal de Noronha",
-        date: "Domingo, 12 de Julho",
+        title: "Dia 3: Baía dos Porcos & Dois Irmãos",
+        date: "Domingo, 12 de Julho de 2026",
         badge: "Imperdível",
         timeline: [
-            { time: "08:30", title: "Partida para Cacimba do Padre 🏝️", desc: "Chegar na praia da Cacimba do Padre, tirar fotos clássicas em frente ao Morro Dois Irmãos." },
-            { time: "10:00", title: "Baía dos Porcos (Mergulho Livre) 🐠", desc: "Seguir pela trilha curta na lateral esquerda da Cacimba para acessar a Baía dos Porcos. Fazer snorkel na piscina natural (melhor ponto de mergulho livre!). Lembrar de consultar a maré baixa.", highlight: true },
-            { time: "Almoço", title: "Almoço na Vila 🍽️", desc: "Pausa para almoçar e descansar um pouco o sol." },
-            { time: "15:00", title: "Mirante da Baía dos Porcos 📸", desc: "Subida até o mirante para ter aquela visão aérea perfeita dos Dois Irmãos e da Baía dos Porcos." },
-            { time: "17:15", title: "Pôr do Sol na Praia do Bode 🌅", desc: "Caminhar até a Praia do Bode (vizinha) para curtir um pôr do sol mais reservado e tranquilo nas areias." }
+            { time: "08:30", title: "Cacimba do Padre 🏖️", desc: "Visita e fotos em frente ao cartão-postal Dois Irmãos." },
+            { time: "10:00", title: "Baía dos Porcos (Snorkel Perfeito) 🐠", desc: "Atravessar o curto caminho de pedras no canto esquerdo até a Baía dos Porcos na maré baixa. Snorkel na piscina natural rasa com peixes coloridos.", highlight: true },
+            { time: "Almoço", title: "Pausa na Vila 🍽️", desc: "Retorno para a vila para almoçar e descansar do sol do meio-dia." },
+            { time: "15:00", title: "Mirante dos Dois Irmãos 📸", desc: "Subida rápida ao mirante para tirar a famosa foto panorâmica de cima." },
+            { time: "17:15", title: "Pôr do sol na Praia do Bode 🌅", desc: "Caminhar até a Praia do Bode e curtir o entardecer num clima super reservado." }
         ]
     },
     4: {
         title: "Dia 4: A Praia Mais Bonita do Mundo",
-        date: "Segunda-feira, 13 de Julho",
+        date: "Segunda-feira, 13 de Julho de 2026",
         badge: "Paraíso",
         timeline: [
-            { time: "08:00", title: "Visita à Praia do Sancho 🌊", desc: "Descer a famosa escada vertical entre as fendas das rochas para acessar a espetacular Praia do Sancho. Mergulho livre sem colete!", highlight: true },
-            { time: "Tarde", title: "Observação de Aves & Trilha 🦜", desc: "Caminhar pelas passarelas suspensas de madeira e procurar os ninhos de Atobá-de-pé-vermelho nas copas das árvores." },
-            { time: "16:30", title: "Trilha do Piquinho 🧗", desc: "Subir a Trilha do Piquinho para termos uma visão de 360 graus da ilha no fim de tarde (segurança em primeiro lugar)." },
-            { time: "17:30", title: "Pôr do Sol no Topo 🌅", desc: "Assistir ao pôr do sol do alto com vista panorâmica espetacular." }
+            { time: "08:00", title: "Praia do Sancho 🌊", desc: "Descer as falésias pelas famosas escadas de metal nas fendas de rocha para acessar o Sancho. Mergulho e snorkel sem colete!", highlight: true },
+            { time: "Tarde", title: "Passarelas do Sancho & Atobás 🦜", desc: "Caminhar pelas passarelas de madeira suspensas, apreciando a vista aérea e avistando ninhos de Atobá nas árvores." },
+            { time: "16:30", title: "Trilha do Piquinho 🧗", desc: "Caminhada leve pela mata até a base do Pico para ter uma visão de 360 graus de toda a ilha (fazer com segurança)." },
+            { time: "17:30", title: "Pôr do Sol no Piquinho 🌅", desc: "Ver o sol descer no mar lá de cima do mirante." }
         ]
     },
     5: {
-        title: "Dia 5: Nascer do Sol & Lua Cheia",
-        date: "Terça-feira, 14 de Julho",
+        title: "Dia 5: Praia do Leão & Nascer da Lua Cheia",
+        date: "Terça-feira, 14 de Julho de 2026",
         badge: "Dia Especial",
         timeline: [
-            { time: "05:15", title: "Amanhecer na Capelinha de São Pedro 🌅", desc: "Acordar cedo para assistir ao nascer do sol na Capelinha ou na Ponta do Air France (alternativamente: passeio de canoa havaiana ao amanhecer)." },
-            { time: "Manhã", title: "Praia do Leão 🐢", desc: "Visita à Praia do Leão. Praia linda e selvagem, famosa pela desova das tartarugas marinhas.", highlight: true },
-            { time: "Tarde", title: "Relax na Pousada ou Compras 🛍️", desc: "Passeio pelas lojinhas de artesanato da Vila dos Remédios, descanso na Pousada Maresia." },
-            { time: "17:00", title: "Museu dos Tubarões - Festival da Lua Cheia 🌝", desc: "Ir para o Museu dos Tubarões no fim do dia para presenciar o incrível Nascer da Lua Cheia sobre o oceano. Dia de Lua Cheia!", highlight: true }
+            { time: "05:15", title: "Amanhecer na Capelinha de São Pedro ⛪", desc: "Opcional: acordar cedo para ver o sol nascer sobre a baía do porto (ou agendar Canoa Havaiana ao amanhecer)." },
+            { time: "09:30", title: "Praia do Leão (Vida Selvagem) 🐢", desc: "Visita à praia do Leão, santuário ecológico de águas indomáveis e desova de tartarugas.", highlight: true },
+            { time: "Almoço", title: "Almoço Regional 🍽️", desc: "Peixe com molho de coco local em restaurante rústico." },
+            { time: "Tarde", title: "Relax na Pousada & Lembranças 🛍️", desc: "Passear pelas lojinhas da Vila dos Remédios e descansar as pernas." },
+            { time: "17:00", title: "Museu dos Tubarões - Lua Cheia 🌝", desc: "Ir ao gramado do museu para curtir a música e ver o espetacular nascer da Lua Cheia gigante subindo direto do oceano!", highlight: true }
         ]
     },
     6: {
-        title: "Dia 6: Repeteco dos Favoritos",
-        date: "Quarta-feira, 15 de Julho",
+        title: "Dia 6: Barco & Repetir Favoritos",
+        date: "Quarta-feira, 15 de Julho de 2026",
         badge: "Despedida",
         timeline: [
-            { time: "Dia Todo", title: "Escolha do Casal 🗺️", desc: "Dia livre para repetir a praia que mais amamos (Sancho, Baía dos Porcos ou Porto) ou fazer algum passeio de barco complementar pela ilha.", highlight: true },
-            { time: "Fim da Tarde", title: "Último Mergulho de Despedida 🌊", desc: "Aproveitar as últimas horas de água salgada morna na Praia da Conceição." },
-            { time: "17:30", title: "Pôr do sol de despedida 🌇", desc: "Escolher nosso ponto preferido para se despedir do sol de Noronha." },
-            { time: "Noite", title: "Jantar Especial de Despedida 🍷", desc: "Jantar especial de comemoração na Vila dos Remédios para celebrar essa viagem inesquecível." }
+            { time: "Manhã", title: "Passeio de Barco / Pranchinha 🛥️", desc: "Fazer o clássico passeio de barco de ponta a ponta na ilha ou mergulho com prancha rebocada (sub-plano do casal).", highlight: true },
+            { time: "Tarde", title: "Repeteco do Melhor Lugar 🌴", desc: "Tarde livre para voltar à praia que mais gostamos de deitar na areia e nadar (ex: Sancho ou Baía dos Porcos)." },
+            { time: "17:30", title: "Último Pôr do Sol de Despedida 🌇", desc: "Assistir ao espetáculo do entardecer no nosso ponto preferido de Noronha." },
+            { time: "20:00", title: "Jantar Especial de Despedida 🍷", desc: "Jantar especial de encerramento para brindar essa viagem mágica em casal." }
         ]
     },
     7: {
-        title: "Dia 7: Retorno para Casa",
-        date: "Quinta-feira, 16 de Julho",
-        badge: "Fim da Viagem",
+        title: "Dia 7: Volta para Casa",
+        date: "Quinta-feira, 16 de Julho de 2026",
+        badge: "Retorno",
         timeline: [
-            { time: "08:00 - 10:00", title: "Café e Preparação 🧳", desc: "Último café da manhã, fechamento das malas e checagem para não esquecer nada." },
-            { time: "08:00 - 12:00", title: "Check-out Pousada Maresia 🚪", desc: "Realizar o check-out na recepção da pousada." },
-            { time: "Horário do Voo", title: "Transfer de Volta 🚌✈️", desc: "Transfer gratuito da pousada nos levará ao Aeroporto de Noronha para o voo de volta para casa." }
+            { time: "08:30", title: "Último café e Malas 🧳", desc: "Aproveitar o café da manhã e fazer o checklist da mala para não esquecer nada." },
+            { time: "12:00", title: "Check-out na Pousada 🚪", desc: "Realizar o fechamento da conta na pousada Maresia." },
+            { time: "Tarde", title: "Transfer & Aeroporto ✈️", desc: "O transfer gratuito da pousada nos levará ao Aeroporto de Fernando de Noronha para o voo de volta para casa." }
         ]
     }
 };
@@ -235,162 +289,367 @@ const ITINERARY_DATA = {
 function initApp() {
     initCountdown();
     initTabs();
-    initSpots();
     initItinerary();
     initChecklist();
+    
+    // Map is initialized lazily when switching to tab-map or on first display if auth is already bypassed
+    if (sessionStorage.getItem("noronha_auth") === "true") {
+        const activeTab = document.querySelector(".dock-btn.active");
+        if (activeTab && activeTab.getAttribute("data-tab") === "tab-map") {
+            setTimeout(initMap, 200);
+        }
+    }
 }
 
 // ================= 1. COUNTDOWN CONTROLLER =================
 function initCountdown() {
     // Target Date: July 10, 2026 at 14:00 (Check-in time)
     const targetDate = new Date("2026-07-10T14:00:00-03:00").getTime();
+    const daysPill = document.getElementById("days-pill");
+    const hoursPill = document.getElementById("hours-pill");
+    const countdownPill = document.getElementById("countdown-pill");
 
     function updateTimer() {
         const now = new Date().getTime();
         const difference = targetDate - now;
 
         if (difference <= 0) {
-            document.getElementById("countdown").innerHTML = "<div class='success-badge' style='font-size:1.5rem; padding: 10px 20px;'><i class='fa-solid fa-umbrella-beach'></i> ESTAMOS NO PARAÍSO! 🌴</div>";
+            if (countdownPill) {
+                countdownPill.innerHTML = "🌴 Aproveitando!";
+                countdownPill.style.background = "var(--emerald)";
+                countdownPill.style.color = "#ffffff";
+                countdownPill.style.borderColor = "var(--emerald)";
+            }
             clearInterval(timerInterval);
             return;
         }
 
         const days = Math.floor(difference / (1000 * 60 * 60 * 24));
         const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-        document.getElementById("days").innerText = String(days).padStart(2, '0');
-        document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-        document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-        document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+        if (daysPill) daysPill.innerText = String(days).padStart(2, '0');
+        if (hoursPill) hoursPill.innerText = String(hours).padStart(2, '0');
     }
 
     updateTimer();
-    const timerInterval = setInterval(updateTimer, 1000);
+    const timerInterval = setInterval(updateTimer, 60000); // Update every minute to save energy
 }
 
 // ================= 2. TAB CONTROLLER =================
 function initTabs() {
-    const navButtons = document.querySelectorAll(".nav-btn");
-    const tabContents = document.querySelectorAll(".tab-content");
+    const dockButtons = document.querySelectorAll(".dock-btn");
+    const tabPanes = document.querySelectorAll(".tab-pane");
 
-    navButtons.forEach(btn => {
+    dockButtons.forEach(btn => {
         btn.addEventListener("click", () => {
             const targetTab = btn.getAttribute("data-tab");
 
             // Update buttons active class
-            navButtons.forEach(b => b.classList.remove("active"));
+            dockButtons.forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
 
             // Update contents active class
-            tabContents.forEach(content => {
-                content.classList.remove("active");
-                if (content.id === targetTab) {
-                    content.classList.add("active");
+            tabPanes.forEach(pane => {
+                pane.classList.remove("active");
+                if (pane.id === targetTab) {
+                    pane.classList.add("active");
                 }
             });
 
-            // If switching to map tab, initialize it and trigger invalidateSize
+            // Lazy initialize map when switching to map tab
             if (targetTab === "tab-map") {
                 setTimeout(() => {
                     initMap();
                     if (mapInstance) {
                         mapInstance.invalidateSize();
                     }
-                }, 100); // Small timeout to ensure DOM element is displayed first
+                }, 150);
             }
 
-            // If switching to mobile, scroll back to top of content
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Scroll container top
+            const paneElement = document.querySelector(".app-main-pane");
+            if (paneElement) paneElement.scrollTop = 0;
         });
     });
 }
 
-// ================= 3. BEACHES AND SPOTS CONTROLLER =================
+// ================= 3. MAP & SPOTS CONTROLLER =================
 let visitedSpots = JSON.parse(localStorage.getItem("visited_spots")) || [];
+let mapInstance = null;
+let mapMarkersRefs = {};
+let currentDrawerSpotId = null;
 
-function initSpots() {
-    const container = document.getElementById("spots-container");
-    const filterButtons = document.querySelectorAll(".filter-btn");
+function initMap() {
+    if (mapInstance) return; // Prevent double initialization
+    
+    // Center of Fernando de Noronha
+    const center = [-3.844, -32.414];
+    
+    // Create map instance
+    mapInstance = L.map('map', {
+        center: center,
+        zoom: 13.2,
+        minZoom: 12,
+        maxZoom: 17,
+        zoomControl: true
+    });
 
-    function renderSpots(filter = "all") {
-        container.innerHTML = "";
+    // Add CartoDB Positron tile layer (Light Mode)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 20
+    }).addTo(mapInstance);
 
-        const filtered = filter === "all" 
-            ? SPOTS_DATA 
-            : SPOTS_DATA.filter(s => s.tags.includes(filter));
+    // Custom marker style generator using divIcon
+    const createCustomIcon = (iconClass, colorClass) => {
+        return L.divIcon({
+            html: `<div class="custom-map-marker ${colorClass}"><i class="${iconClass}"></i></div>`,
+            className: 'leaflet-custom-marker',
+            iconSize: [32, 32],
+            iconAnchor: [16, 32]
+        });
+    };
 
-        filtered.forEach(spot => {
-            const isVisited = visitedSpots.includes(spot.id);
-            const card = document.createElement("div");
-            card.className = `spot-card ${isVisited ? "visited" : ""}`;
-            card.dataset.id = spot.id;
+    // Add markers to map from SPOTS_DATA
+    SPOTS_DATA.forEach(spot => {
+        const isVisited = visitedSpots.includes(spot.id);
+        const isLodging = spot.id === "lodging";
+        
+        let colorClass = spot.color;
+        if (isVisited && !isLodging) {
+            colorClass = "visited-spot";
+        }
 
-            let tagBadges = "";
-            spot.tags.forEach(t => {
-                let label = t;
-                if(t === "snorkel") label = "🤿 Snorkel";
-                if(t === "sunset") label = "🌅 Pôr do Sol";
-                if(t === "sunrise") label = "🌇 Nascer Sol";
-                if(t === "special") label = "⭐ Especial";
-                tagBadges += `<span class="spot-tag tag-${t}">${label}</span>`;
-            });
+        const icon = createCustomIcon(spot.icon, colorClass);
+        const marker = L.marker(spot.coords, { icon: icon }).addTo(mapInstance);
+        
+        // Save reference to marker
+        mapMarkersRefs[spot.id] = marker;
 
-            card.innerHTML = `
-                <div class="spot-header">
-                    <div class="spot-tags">${tagBadges}</div>
-                    <button class="btn-visited-check" onclick="toggleSpotVisited('${spot.id}')" title="${isVisited ? 'Marcar como não visitado' : 'Marcar como visitado'}">
-                        <i class="${isVisited ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle-check'}"></i>
-                    </button>
-                </div>
-                <h4>${spot.name}</h4>
-                <p>${spot.description}</p>
-                <div class="spot-meta">
-                    <i class="fa-solid fa-circle-info"></i> Dica: ${spot.tip}
-                </div>
-            `;
-            container.appendChild(card);
+        // Custom action on marker click: open slide up drawer
+        marker.on('click', () => {
+            mapInstance.setView(spot.coords, 14.5);
+            openDrawer(spot.id);
+        });
+    });
+
+    // Drawing Trails (Polylines)
+    // 1. Trilha do Sancho (wooden walkways)
+    const sanchoTrail = [
+        [-3.8546, -32.4431], // Sancho Beach
+        [-3.8530, -32.4420], // Sancho Viewpoint
+        [-3.8510, -32.4410], // Sancho Access Road
+    ];
+    L.polyline(sanchoTrail, {
+        color: 'var(--gold)',
+        weight: 3,
+        dashArray: '5, 8',
+        opacity: 0.85
+    }).addTo(mapInstance).bindTooltip("Trilha do Sancho (Fácil)", { sticky: true });
+
+    // 2. Trilha do Piquinho
+    const piquinhoTrail = [
+        [-3.8415, -32.4124], // Start near Vila
+        [-3.8425, -32.4170], // Base of Pico
+        [-3.8440, -32.4210], // Morro do Pico/Piquinho Peak
+    ];
+    L.polyline(piquinhoTrail, {
+        color: 'var(--sunset)',
+        weight: 3.5,
+        dashArray: '5, 8',
+        opacity: 0.85
+    }).addTo(mapInstance).bindTooltip("Trilha do Piquinho (Moderada)", { sticky: true });
+
+    // 3. Trilha Baía dos Porcos (from Cacimba)
+    const porcosTrail = [
+        [-3.8497, -32.4312], // Cacimba do Padre
+        [-3.8501, -32.4325], // Rocks path
+        [-3.8504, -32.4339], // Baía dos Porcos
+    ];
+    L.polyline(porcosTrail, {
+        color: 'var(--emerald)',
+        weight: 3.5,
+        dashArray: '3, 6',
+        opacity: 0.9
+    }).addTo(mapInstance).bindTooltip("Trilha Baía dos Porcos (Pedras)", { sticky: true });
+
+    // Close drawer when clicking anywhere on the map
+    mapInstance.on('click', () => {
+        closeDrawer();
+    });
+
+    // Hook up rules modal triggers
+    const btnToggleRules = document.getElementById("btn-toggle-rules");
+    const rulesModal = document.getElementById("rules-modal");
+    const btnCloseRules = document.getElementById("btn-close-rules");
+
+    if (btnToggleRules && rulesModal && btnCloseRules) {
+        btnToggleRules.addEventListener("click", () => {
+            rulesModal.classList.remove("hidden");
+        });
+        btnCloseRules.addEventListener("click", () => {
+            rulesModal.classList.add("hidden");
+        });
+        rulesModal.addEventListener("click", (e) => {
+            if (e.target === rulesModal) {
+                rulesModal.classList.add("hidden");
+            }
         });
     }
 
-    filterButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            filterButtons.forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-            renderSpots(btn.getAttribute("data-filter"));
+    // Drawer handle click closes drawer
+    const drawerHandle = document.getElementById("map-drawer-handle");
+    if (drawerHandle) {
+        drawerHandle.addEventListener("click", () => {
+            closeDrawer();
         });
-    });
-
-    renderSpots();
+    }
 }
 
-window.toggleSpotVisited = function(spotId) {
-    const index = visitedSpots.indexOf(spotId);
+function openDrawer(spotId) {
+    const spot = SPOTS_DATA.find(s => s.id === spotId);
+    if (!spot) return;
+
+    currentDrawerSpotId = spotId;
+    document.getElementById("drawer-title").innerText = spot.name;
+    document.getElementById("drawer-description").innerText = spot.description;
+    document.getElementById("drawer-tip").innerText = spot.tip;
+
+    // Render tags
+    const tagsContainer = document.getElementById("drawer-tags");
+    tagsContainer.innerHTML = "";
+    spot.tags.forEach(t => {
+        let label = t;
+        if(t === "snorkel") label = "🤿 Snorkel";
+        if(t === "sunset") label = "🌅 Pôr do Sol";
+        if(t === "sunrise") label = "🌇 Nascer Sol";
+        if(t === "special") label = "⭐ Especial";
+        
+        const span = document.createElement("span");
+        span.className = `spot-tag tag-${t}`;
+        span.innerText = label;
+        tagsContainer.appendChild(span);
+    });
+
+    // Update visited state button styles
+    updateDrawerVisitedButton(spotId);
+
+    // Show drawer
+    const drawer = document.getElementById("map-drawer");
+    if (drawer) {
+        drawer.classList.remove("hidden");
+        setTimeout(() => {
+            drawer.classList.add("active");
+        }, 10);
+    }
+}
+
+function closeDrawer() {
+    const drawer = document.getElementById("map-drawer");
+    if (drawer && drawer.classList.contains("active")) {
+        drawer.classList.remove("active");
+        setTimeout(() => {
+            drawer.classList.add("hidden");
+        }, 300);
+    }
+    currentDrawerSpotId = null;
+}
+
+function updateDrawerVisitedButton(spotId) {
+    const isVisited = visitedSpots.includes(spotId);
+    const btn = document.getElementById("drawer-visited-btn");
+    const isLodging = spotId === "lodging";
+
+    if (btn) {
+        if (isLodging) {
+            btn.style.display = "none";
+            return;
+        }
+        btn.style.display = "flex";
+
+        if (isVisited) {
+            btn.classList.add("visited");
+            btn.querySelector("i").className = "fa-solid fa-circle-check";
+            btn.querySelector("span").innerText = "Visitado!";
+        } else {
+            btn.classList.remove("visited");
+            btn.querySelector("i").className = "fa-regular fa-circle-check";
+            btn.querySelector("span").innerText = "Marcar Visitado";
+        }
+    }
+}
+
+window.toggleDrawerSpotVisited = function() {
+    if (!currentDrawerSpotId || currentDrawerSpotId === "lodging") return;
+    
+    const index = visitedSpots.indexOf(currentDrawerSpotId);
     if (index === -1) {
-        visitedSpots.push(spotId);
+        visitedSpots.push(currentDrawerSpotId);
         showToast("Marcado como visitado! 🎉");
     } else {
         visitedSpots.splice(index, 1);
+        showToast("Removido dos visitados.");
     }
     localStorage.setItem("visited_spots", JSON.stringify(visitedSpots));
+    updateDrawerVisitedButton(currentDrawerSpotId);
     
-    // Rerender spots with current filter
-    const activeFilter = document.querySelector(".filter-btn.active").getAttribute("data-filter");
-    initSpots(); // Rerender
+    // Update map marker icon color
+    updateMapMarkersVisitedState();
 };
+
+function updateMapMarkersVisitedState() {
+    SPOTS_DATA.forEach(spot => {
+        const marker = mapMarkersRefs[spot.id];
+        if (marker) {
+            const isVisited = visitedSpots.includes(spot.id);
+            const isLodging = spot.id === "lodging";
+            
+            let colorClass = spot.color;
+            if (isVisited && !isLodging) {
+                colorClass = "visited-spot";
+            }
+            
+            // Re-create the icon with the correct color
+            const newIcon = L.divIcon({
+                html: `<div class="custom-map-marker ${colorClass}"><i class="${spot.icon}"></i></div>`,
+                className: 'leaflet-custom-marker',
+                iconSize: [32, 32],
+                iconAnchor: [16, 32]
+            });
+            
+            marker.setIcon(newIcon);
+        }
+    });
+}
+
+// Global function to switch tabs from popup click
+window.navigateToTab = function(tabId) {
+    const btn = document.querySelector(`.dock-btn[data-tab="${tabId}"]`);
+    if (btn) {
+        btn.click();
+    }
+};
+
 
 // ================= 4. ITINERARY DIARY CONTROLLER =================
 function initItinerary() {
-    const dayButtons = document.querySelectorAll(".day-btn");
-    const container = document.getElementById("itinerary-details");
+    const container = document.getElementById("itinerary-accordion-container");
+    if (!container) return;
+    
+    container.innerHTML = "";
 
-    function renderDay(dayNum) {
-        const dayData = ITINERARY_DATA[dayNum];
-        if (!dayData) return;
+    Object.keys(ITINERARY_DATA).forEach(dayKey => {
+        const day = ITINERARY_DATA[dayKey];
+        
+        const accordionItem = document.createElement("div");
+        accordionItem.className = "accordion-item";
+        if (dayKey === "1") {
+            accordionItem.classList.add("active");
+        }
 
         let timelineHTML = "";
-        dayData.timeline.forEach(item => {
+        day.timeline.forEach(item => {
             timelineHTML += `
                 <div class="timeline-item ${item.highlight ? 'highlight' : ''}">
                     <span class="time">${item.time}</span>
@@ -400,52 +659,72 @@ function initItinerary() {
             `;
         });
 
-        container.innerHTML = `
-            <div class="itinerary-card">
-                <div class="itinerary-header">
-                    <h3>${dayData.title}</h3>
-                    <span class="day-badge">${dayData.badge}</span>
+        accordionItem.innerHTML = `
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <div class="header-left">
+                    <span class="day-num">D${dayKey}</span>
+                    <div>
+                        <h4>${day.title}</h4>
+                        <small>${day.date}</small>
+                    </div>
                 </div>
-                <p style="color: var(--text-secondary); margin-bottom: 20px; font-style: italic;"><i class="fa-regular fa-calendar"></i> ${dayData.date}</p>
+                <div class="header-right">
+                    <span class="day-badge">${day.badge}</span>
+                    <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                </div>
+            </div>
+            <div class="accordion-content" style="${dayKey === '1' ? 'max-height: 1000px;' : ''}">
                 <div class="timeline">
                     ${timelineHTML}
                 </div>
             </div>
         `;
-    }
 
-    dayButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            dayButtons.forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-            renderDay(btn.getAttribute("data-day"));
-        });
+        container.appendChild(accordionItem);
+    });
+}
+
+window.toggleAccordion = function(headerElement) {
+    const clickedItem = headerElement.parentElement;
+    const isAlreadyActive = clickedItem.classList.contains("active");
+    
+    // Close all other accordions and reset max-heights
+    document.querySelectorAll(".accordion-item").forEach(item => {
+        item.classList.remove("active");
+        const content = item.querySelector(".accordion-content");
+        if (content) {
+            content.style.maxHeight = null;
+        }
     });
 
-    // Render first day on startup
-    renderDay(1);
-}
+    // If it wasn't active, open it
+    if (!isAlreadyActive) {
+        clickedItem.classList.add("active");
+        const content = clickedItem.querySelector(".accordion-content");
+        if (content) {
+            content.style.maxHeight = "1000px"; // Set to high max-height for animation
+        }
+    }
+};
+
 
 // ================= 5. CHECKLIST CONTROLLER =================
 let checklistItems = JSON.parse(localStorage.getItem("noronha_checklist")) || [];
 
-// Default Checklist values if empty
+// Default Checklist values
 const DEFAULT_CHECKLIST = [
-    // Mala
     { id: 1, text: "Óculos de sol", category: "Mala", completed: false },
-    { id: 2, text: "Protetor solar / Camisa Lycra", category: "Mala", completed: false },
-    { id: 3, text: "Máscara de snorkel & Nadadeiras", category: "Mala", completed: false },
-    { id: 4, text: "Sapatilha náutica / Calçado confortável", category: "Mala", completed: false },
-    { id: 5, text: "Repelente de insetos", category: "Mala", completed: false },
-    { id: 6, text: "Roupas de banho e roupas leves", category: "Mala", completed: false },
-    // Documentos
-    { id: 7, text: "RG ou CNH original físico", category: "Documentos", completed: false },
-    { id: 8, text: "App da Booking com a reserva offline", category: "Documentos", completed: false },
-    { id: 9, text: "Pagar Taxa de Preservação Ambiental (TPA)", category: "Documentos", completed: false },
-    { id: 10, text: "Comprar Ingresso do Parque Nacional Marinho", category: "Documentos", completed: false },
-    // Providências
-    { id: 11, text: "Confirmar horário do Transfer de chegada", category: "Providências", completed: false },
-    { id: 12, text: "Levar dinheiro em espécie (sinal oscila)", category: "Providências", completed: false }
+    { id: 2, text: "Protetor solar corporal e facial", category: "Mala", completed: false },
+    { id: 3, text: "Camiseta com proteção UV (Lycra)", category: "Mala", completed: false },
+    { id: 4, text: "Máscara de snorkel e nadadeiras", category: "Mala", completed: false },
+    { id: 5, text: "Sapatilhas náuticas de neoprene (crucial para Baía dos Porcos)", category: "Mala", completed: false },
+    { id: 6, text: "Repelente de insetos eficiente", category: "Mala", completed: false },
+    { id: 7, text: "Casaco leve corta-vento (ventos noturnos)", category: "Mala", completed: false },
+    { id: 8, text: "Documento de identidade físico (RG ou CNH)", category: "Documentos", completed: false },
+    { id: 9, text: "Pagar Taxa de Preservação Ambiental (TPA) online", category: "Documentos", completed: false },
+    { id: 10, text: "Comprar ingresso do Parque Nacional Marinho online", category: "Documentos", completed: false },
+    { id: 11, text: "Garantir o Voucher do transfer de chegada", category: "Providências", completed: false },
+    { id: 12, text: "Levar dinheiro em espécie (sinal de internet falha muito)", category: "Providências", completed: false }
 ];
 
 function initChecklist() {
@@ -458,60 +737,80 @@ function initChecklist() {
     const input = document.getElementById("checklist-input");
     const categorySelect = document.getElementById("checklist-category");
 
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const text = input.value.trim();
-        const category = categorySelect.value;
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const text = input.value.trim();
+            const category = categorySelect.value;
 
-        if (text) {
-            const newItem = {
-                id: Date.now(),
-                text: text,
-                category: category,
-                completed: false
-            };
-            checklistItems.push(newItem);
-            localStorage.setItem("noronha_checklist", JSON.stringify(checklistItems));
-            input.value = "";
+            if (text) {
+                const newItem = {
+                    id: Date.now(),
+                    text: text,
+                    category: category,
+                    completed: false
+                };
+                checklistItems.push(newItem);
+                localStorage.setItem("noronha_checklist", JSON.stringify(checklistItems));
+                input.value = "";
+                renderChecklists();
+                showToast("Item adicionado! 🎒");
+            }
+        });
+    }
+
+    // Category pills filter trigger
+    const pills = document.querySelectorAll(".cat-pill");
+    pills.forEach(pill => {
+        pill.addEventListener("click", () => {
+            pills.forEach(p => p.classList.remove("active"));
+            pill.classList.add("active");
             renderChecklists();
-            showToast("Item adicionado! 🎒");
-        }
+        });
     });
 
     renderChecklists();
 }
 
 function renderChecklists() {
-    const listMala = document.getElementById("list-mala");
-    const listDocs = document.getElementById("list-docs");
-    const listProvidencias = document.getElementById("list-providencias");
+    const listContainer = document.getElementById("todo-items-list");
+    if (!listContainer) return;
+    
+    listContainer.innerHTML = "";
 
-    listMala.innerHTML = "";
-    listDocs.innerHTML = "";
-    listProvidencias.innerHTML = "";
+    const activePill = document.querySelector(".cat-pill.active");
+    const activeCategory = activePill ? activePill.getAttribute("data-cat") : "all";
 
-    checklistItems.forEach(item => {
+    const filteredItems = activeCategory === "all" 
+        ? checklistItems 
+        : checklistItems.filter(item => item.category === activeCategory);
+
+    filteredItems.forEach(item => {
         const li = document.createElement("li");
         li.className = `todo-item ${item.completed ? 'checked' : ''}`;
+        
+        let iconHtml = "";
+        if (item.category === "Mala") {
+            iconHtml = '<i class="fa-solid fa-suitcase text-turquoise"></i>';
+        } else if (item.category === "Documentos") {
+            iconHtml = '<i class="fa-solid fa-file-invoice text-gold"></i>';
+        } else {
+            iconHtml = '<i class="fa-solid fa-circle-exclamation text-sunset"></i>';
+        }
+
         li.innerHTML = `
             <div class="todo-left" onclick="toggleTodoCompleted(${item.id})">
                 <div class="checkbox-custom">
                     <i class="fa-solid fa-check"></i>
                 </div>
+                <span class="todo-cat-icon">${iconHtml}</span>
                 <span class="todo-text">${item.text}</span>
             </div>
             <button class="btn-delete-todo" onclick="deleteTodoItem(${item.id})" title="Excluir item">
                 <i class="fa-regular fa-trash-can"></i>
             </button>
         `;
-
-        if (item.category === "Mala") {
-            listMala.appendChild(li);
-        } else if (item.category === "Documentos") {
-            listDocs.appendChild(li);
-        } else {
-            listProvidencias.appendChild(li);
-        }
+        listContainer.appendChild(li);
     });
 
     updateProgress();
@@ -534,18 +833,31 @@ window.deleteTodoItem = function(id) {
 };
 
 function updateProgress() {
-    if (checklistItems.length === 0) {
-        document.getElementById("checklist-progress").style.width = "0%";
-        document.getElementById("checklist-progress-text").innerText = "Sem itens no checklist";
-        return;
-    }
-
     const completedCount = checklistItems.filter(i => i.completed).length;
     const totalCount = checklistItems.length;
-    const percentage = Math.round((completedCount / totalCount) * 100);
+    const percentage = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
-    document.getElementById("checklist-progress").style.width = `${percentage}%`;
-    document.getElementById("checklist-progress-text").innerText = `${completedCount} de ${totalCount} itens prontos (${percentage}%)`;
+    // Checklist Tab Progress
+    const fill = document.getElementById("checklist-progress-fill");
+    if (fill) fill.style.width = `${percentage}%`;
+    
+    const percentLabel = document.getElementById("checklist-progress-percent");
+    if (percentLabel) percentLabel.innerText = `${percentage}%`;
+    
+    const countLabel = document.getElementById("checklist-progress-label");
+    if (countLabel) countLabel.innerText = `${completedCount} de ${totalCount} concluídos`;
+
+    // Dashboard Tab Ring Progress
+    const ringPercent = document.getElementById("progress-ring-percent");
+    if (ringPercent) ringPercent.innerText = `${percentage}%`;
+    
+    const circle = document.getElementById("dashboard-progress-ring");
+    if (circle) {
+        const circumference = 2 * Math.PI * 24; // 150.8
+        circle.style.strokeDasharray = `${circumference} ${circumference}`;
+        const offset = circumference - (percentage / 100) * circumference;
+        circle.style.strokeDashoffset = offset;
+    }
 }
 
 
@@ -553,7 +865,10 @@ function updateProgress() {
 
 // Copy text to clipboard
 window.copyText = function(elementId, successMessage) {
-    const text = document.getElementById(elementId).innerText;
+    const element = document.getElementById(elementId);
+    if (!element) return;
+    
+    const text = element.innerText;
     navigator.clipboard.writeText(text).then(() => {
         showToast(successMessage);
     }).catch(err => {
@@ -564,8 +879,12 @@ window.copyText = function(elementId, successMessage) {
 // Show temporary toast notification
 function showToast(message) {
     const toast = document.getElementById("toast");
+    if (!toast) return;
+
     toast.innerText = message;
     toast.classList.remove("hidden");
+    
+    // Tiny timeout to trigger CSS transition
     setTimeout(() => {
         toast.classList.add("show");
     }, 10);
@@ -573,198 +892,9 @@ function showToast(message) {
     // Hide after 2.5 seconds
     setTimeout(() => {
         toast.classList.remove("show");
+        // Wait for CSS fade-out before adding hidden back
         setTimeout(() => {
             toast.classList.add("hidden");
         }, 400);
     }, 2500);
 }
-
-// ================= LEAFLET MAP CONTROLLER =================
-let mapInstance = null;
-
-function initMap() {
-    if (mapInstance) return; // Prevent double initialization
-    
-    // Center of Fernando de Noronha
-    const center = [-3.844, -32.414];
-    
-    // Create map instance
-    mapInstance = L.map('map', {
-        center: center,
-        zoom: 13.5,
-        minZoom: 12,
-        maxZoom: 17
-    });
-
-    // Add CartoDB Positron tile layer for a clean light look
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 20
-    }).addTo(mapInstance);
-
-    // Custom marker style generator using divIcon
-    const createCustomIcon = (iconClass, colorClass) => {
-        return L.divIcon({
-            html: `<div class="custom-map-marker ${colorClass}"><i class="${iconClass}"></i></div>`,
-            className: 'leaflet-custom-marker',
-            iconSize: [30, 30],
-            iconAnchor: [15, 30],
-            popupAnchor: [0, -30]
-        });
-    };
-
-    // Coordinate markers data
-    const mapMarkers = [
-        {
-            name: "Pousada Maresia 🏨",
-            coords: [-3.8415, -32.4124],
-            desc: "Nossa hospedagem confirmada na Vila dos Remédios! Bairro central e aconchegante.",
-            icon: "fa-solid fa-hotel",
-            color: "marker-lodging",
-            actionId: "tab-lodging"
-        },
-        {
-            name: "Praia do Sancho 🌊",
-            coords: [-3.8546, -32.4431],
-            desc: "A praia mais bonita do mundo! Acesso por fenda estreita entre rochas. Mergulho livre.",
-            icon: "fa-solid fa-umbrella-beach",
-            color: "marker-special",
-            actionId: "tab-spots"
-        },
-        {
-            name: "Baía dos Porcos 🐠",
-            coords: [-3.8504, -32.4339],
-            desc: "Melhor ponto de snorkel (mergulho livre) com piscinas naturais de águas calmas.",
-            icon: "fa-solid fa-mask-snorkel",
-            color: "marker-special",
-            actionId: "tab-spots"
-        },
-        {
-            name: "Cacimba do Padre 🏝️",
-            coords: [-3.8497, -32.4312],
-            desc: "Vista clássica do Morro Dois Irmãos e excelente para banho de mar calmo.",
-            icon: "fa-solid fa-umbrella-beach",
-            color: "marker-default",
-            actionId: "tab-spots"
-        },
-        {
-            name: "Praia do Porto ⚓",
-            coords: [-3.8347, -32.4035],
-            desc: "Mergulho de snorkel próximo ao Naufrágio do navio grego, passeio de canoa ou bike aquática.",
-            icon: "fa-solid fa-anchor",
-            color: "marker-default",
-            actionId: "tab-spots"
-        },
-        {
-            name: "Praia do Leão 🐢",
-            coords: [-3.8647, -32.4330],
-            desc: "Praia de mar aberto belíssima e principal área de desova das tartarugas marinhas.",
-            icon: "fa-solid fa-shield-halved",
-            color: "marker-special",
-            actionId: "tab-spots"
-        },
-        {
-            name: "Praia da Conceição 🌅",
-            coords: [-3.8427, -32.4172],
-            desc: "Extensa praia aos pés do Morro do Pico, ideal para curtir o dia e ver o pôr do sol.",
-            icon: "fa-solid fa-sun",
-            color: "marker-sunset",
-            actionId: "tab-spots"
-        },
-        {
-            name: "Museu dos Tubarões 🌝",
-            coords: [-3.8322, -32.4005],
-            desc: "Mirante incrível para ver o Nascer da Lua Cheia no dia 14/07.",
-            icon: "fa-solid fa-moon",
-            color: "marker-special",
-            actionId: "tab-spots"
-        },
-        {
-            name: "Mirante do Forte do Boldró 🌇",
-            coords: [-3.8490, -32.4280],
-            desc: "O ponto mais famoso e tradicional da ilha para assistir ao pôr do sol com o Dois Irmãos ao fundo.",
-            icon: "fa-solid fa-sun",
-            color: "marker-sunset",
-            actionId: "tab-spots"
-        },
-        {
-            name: "Capelinha de São Pedro ⛪",
-            coords: [-3.8335, -32.4015],
-            desc: "Visual espetacular da baía do porto, ponto clássico para contemplar o nascer do sol.",
-            icon: "fa-solid fa-church",
-            color: "marker-default",
-            actionId: "tab-spots"
-        },
-        {
-            name: "Ponta do Air France ⛵",
-            coords: [-3.8300, -32.4000],
-            desc: "Encontro do mar de dentro e de fora. Ponto clássico do amanhecer.",
-            icon: "fa-solid fa-compass",
-            color: "marker-default",
-            actionId: "tab-spots"
-        }
-    ];
-
-    // Add markers to map
-    mapMarkers.forEach(spot => {
-        const icon = createCustomIcon(spot.icon, spot.color);
-        const popupContent = `
-            <div>
-                <h3>${spot.name}</h3>
-                <p>${spot.desc}</p>
-                <button class="popup-btn" style="width:100%; border:1px solid var(--accent); padding:4px 0; border-radius:6px; cursor:pointer;" onclick="navigateToTab('${spot.actionId}')">Ver Detalhes</button>
-            </div>
-        `;
-        L.marker(spot.coords, { icon: icon }).addTo(mapInstance).bindPopup(popupContent);
-    });
-
-    // Drawing Trails (Polylines)
-    // 1. Trilha do Sancho (wooden walkways)
-    const sanchoTrail = [
-        [-3.8546, -32.4431], // Sancho Beach
-        [-3.8530, -32.4420], // Sancho Viewpoint
-        [-3.8510, -32.4410], // Sancho Access Road
-    ];
-    L.polyline(sanchoTrail, {
-        color: '#e0b07a',
-        weight: 3,
-        dashArray: '5, 8',
-        opacity: 0.8
-    }).addTo(mapInstance).bindTooltip("Trilha do Sancho (Fácil)", { sticky: true });
-
-    // 2. Trilha do Piquinho
-    const piquinhoTrail = [
-        [-3.8415, -32.4124], // Start near Vila
-        [-3.8425, -32.4170], // Base of Pico
-        [-3.8440, -32.4210], // Morro do Pico/Piquinho Peak
-    ];
-    L.polyline(piquinhoTrail, {
-        color: '#ff6b4a',
-        weight: 3.5,
-        dashArray: '5, 8',
-        opacity: 0.8
-    }).addTo(mapInstance).bindTooltip("Trilha do Piquinho (Moderada)", { sticky: true });
-
-    // 3. Trilha Baía dos Porcos (from Cacimba)
-    const porcosTrail = [
-        [-3.8497, -32.4312], // Cacimba do Padre
-        [-3.8501, -32.4325], // Rocks path
-        [-3.8504, -32.4339], // Baía dos Porcos
-    ];
-    L.polyline(porcosTrail, {
-        color: '#10b981',
-        weight: 3.5,
-        dashArray: '3, 6',
-        opacity: 0.9
-    }).addTo(mapInstance).bindTooltip("Trilha Baía dos Porcos (Pedras - Curta)", { sticky: true });
-}
-
-// Global function to switch tabs from popup click
-window.navigateToTab = function(tabId) {
-    const btn = document.querySelector(`.nav-btn[data-tab="${tabId}"]`);
-    if (btn) {
-        btn.click();
-    }
-};
-
