@@ -147,6 +147,227 @@
                     </div>
                 </div>
 
+                <!-- Flight Boarding Pass -->
+                <div class="boarding-pass-card flight-pass-card" style="margin-bottom: 24px;">
+                    <div class="pass-top">
+                        <div class="pass-title">
+                            <span class="badge-gold">VOOS E PASSAGENS</span>
+                            <h4>GOL Linhas Aéreas</h4>
+                        </div>
+                        <i class="fa-solid fa-plane pass-icon" style="color: var(--sunset); background: rgba(255, 107, 74, 0.08); border-color: var(--sunset);"></i>
+                    </div>
+                    <div class="pass-divider">
+                        <div class="divider-circle left"></div>
+                        <div class="divider-line"></div>
+                        <div class="divider-circle right"></div>
+                    </div>
+                    <div class="pass-body">
+                        <div class="pass-info-grid">
+                            <div>
+                                <small>LOCALIZADOR</small>
+                                <div class="copy-lbl">
+                                    <strong id="flight-loc">NPGIBT</strong>
+                                    <button onclick="copyText('flight-loc', 'Localizador copiado!')"><i class="fa-regular fa-copy"></i></button>
+                                </div>
+                            </div>
+                            <div>
+                                <small>Nº DO PEDIDO</small>
+                                <div class="copy-lbl">
+                                    <strong id="flight-req">3963411</strong>
+                                    <button onclick="copyText('flight-req', 'Número do pedido copiado!')"><i class="fa-regular fa-copy"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pass-booking-details" style="background: rgba(255, 107, 74, 0.04); border-color: rgba(255, 107, 74, 0.15);">
+                            <div class="booking-item" style="display: flex; justify-content: space-between; align-items: center;">
+                                <span class="lbl" style="font-size: 0.8rem; color: var(--text-secondary);"><i class="fa-solid fa-plane-departure" style="color: var(--sunset);"></i> GOL Viagens</span>
+                                <a href="https://b2c.voegol.com.br/minhas-viagens/encontrar-viagem" target="_blank" class="btn-link" style="font-size: 0.8rem; color: var(--sunset);">Encontrar Viagem <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                            <div class="booking-item" style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                                <span class="lbl" style="font-size: 0.8rem; color: var(--text-secondary);"><i class="fa-solid fa-receipt" style="color: var(--sunset);"></i> Vai de Promo</span>
+                                <a href="https://www.vaidepromo.com.br/cliente/pedidos/?userLoggedIn=true" target="_blank" class="btn-link" style="font-size: 0.8rem; color: var(--sunset);">Ver Pedido Promo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pass-barcode">
+                        <div>
+                            <div class="barcode-line" style="width: 2px; height: 25px;"></div>
+                            <div class="barcode-line" style="width: 4px; height: 25px;"></div>
+                            <div class="barcode-line" style="width: 1px; height: 25px;"></div>
+                            <div class="barcode-line" style="width: 3px; height: 25px;"></div>
+                            <div class="barcode-line" style="width: 2px; height: 25px;"></div>
+                            <div class="barcode-line" style="width: 5px; height: 25px;"></div>
+                            <div class="barcode-line" style="width: 1px; height: 25px;"></div>
+                            <div class="barcode-line" style="width: 4px; height: 25px;"></div>
+                            <div class="barcode-line" style="width: 2px; height: 25px;"></div>
+                            <div class="barcode-line" style="width: 3px; height: 25px;"></div>
+                        </div>
+                        <span class="barcode-num">GOL - NORONHA 2026</span>
+                    </div>
+                </div>
+
+                <!-- Atalaia Vouchers Card -->
+                <div class="app-glass-card vouchers-card" style="margin-bottom: 24px;">
+                    <h5 style="margin-bottom: 5px;"><i class="fa-solid fa-qrcode text-gold"></i> Vouchers Atalaia 🌊</h5>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 15px;">
+                        Agendamento confirmado para <strong>16/07/2026</strong> com abertura às <strong>12:30</strong>. Realizar check-in com 20 min de antecedência.
+                    </p>
+                    
+                    <div class="vouchers-tickets-container" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <!-- Giovanna's Ticket -->
+                        <div class="voucher-ticket" style="flex: 1; min-width: 220px; background: #ffffff; border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 15px; box-shadow: var(--shadow-premium); text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div class="ticket-header" style="margin-bottom: 12px; border-bottom: 1px dashed var(--glass-border); padding-bottom: 8px;">
+                                <strong style="font-size: 0.9rem; display: block; color: var(--text-primary);">Giovanna Farnezi Silva</strong>
+                                <small style="font-size: 0.75rem; color: var(--text-secondary);">CPF: 485.052.028-64</small>
+                            </div>
+                            <div class="ticket-qr-area" style="background: #fafafa; padding: 10px; border-radius: 8px; margin-bottom: 12px; display: inline-block;">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Participante%3A%20Giovanna%20Farnezi%20Silva%0ACPF%3A%2048505202864%0AAtalaia%2016%2F07%2F2026%2012%3A30" alt="QR Code Giovanna" style="width: 120px; height: 120px; vertical-align: middle;">
+                            </div>
+                            <div class="ticket-footer">
+                                <span class="badge-gold" style="font-size: 0.7rem; padding: 3px 8px; margin: 0;">ATALAIA 12:30</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Renan's Ticket -->
+                        <div class="voucher-ticket" style="flex: 1; min-width: 220px; background: #ffffff; border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 15px; box-shadow: var(--shadow-premium); text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div class="ticket-header" style="margin-bottom: 12px; border-bottom: 1px dashed var(--glass-border); padding-bottom: 8px;">
+                                <strong style="font-size: 0.9rem; display: block; color: var(--text-primary);">Renan Donadeli Anhezini</strong>
+                                <small style="font-size: 0.75rem; color: var(--text-secondary);">CPF: 449.227.578-99</small>
+                            </div>
+                            <div class="ticket-qr-area" style="background: #fafafa; padding: 10px; border-radius: 8px; margin-bottom: 12px; display: inline-block;">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Participante%3A%20Renan%20Donadeli%20Anhezini%0ACPF%3A%2044922757899%0AAtalaia%2016%2F07%2F2026%2012%3A30" alt="QR Code Renan" style="width: 120px; height: 120px; vertical-align: middle;">
+                            </div>
+                            <div class="ticket-footer">
+                                <span class="badge-gold" style="font-size: 0.7rem; padding: 3px 8px; margin: 0;">ATALAIA 12:30</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Atalaia Rules box -->
+                    <div class="voucher-rules-box" style="margin-top: 15px; background: var(--gold-light); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid rgba(202, 162, 82, 0.2); border-radius: var(--radius-md);">
+                        <strong style="color: var(--sunset); font-size: 0.8rem; display: block; margin-bottom: 6px;"><i class="fa-solid fa-triangle-exclamation"></i> REGRAS DO ATALAIA (LEIAM COM ATENÇÃO!):</strong>
+                        <ul class="voucher-rules-list" style="list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 0.8rem; color: var(--text-secondary);">
+                            <li style="display: flex; gap: 8px; align-items: flex-start;"><i class="fa-solid fa-check text-turquoise" style="margin-top: 3px;"></i> <span>Chegar com <strong>20 minutos de antecedência</strong> portando o voucher impresso/digital e documento físico com foto.</span></li>
+                            <li style="display: flex; gap: 8px; align-items: flex-start;"><i class="fa-solid fa-check text-turquoise" style="margin-top: 3px;"></i> <span>Uso obrigatório de <strong>máscara, snorkel e colete flutuador</strong> (alugar com antecedência).</span></li>
+                            <li style="display: flex; gap: 8px; align-items: flex-start;"><i class="fa-solid fa-ban text-sunset" style="margin-top: 3px;"></i> <span><strong>NÃO É PERMITIDO</strong> usar protetor solar, repelente (e outros dermocosméticos) antes de entrar na água (para preservar o berçário de corais).</span></li>
+                            <li style="display: flex; gap: 8px; align-items: flex-start;"><i class="fa-solid fa-ban text-sunset" style="margin-top: 3px;"></i> <span><strong>NÃO É PERMITIDO</strong> usar nadadeiras, sapatilhas, luvas, paus de selfie, drones ou extensores de câmera/celular.</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Nature & Wildlife Guide -->
+                <div class="app-glass-card nature-guide-card" style="margin-bottom: 24px;">
+                    <h5><i class="fa-solid fa-fish-fins text-turquoise"></i> Natureza & Vida Marinha 🐬</h5>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px;">Guia rápido dos encontros e da biodiversidade local:</p>
+                    
+                    <div class="nature-bullets-container" style="display: flex; flex-direction: column; gap: 12px;">
+                        <div class="nature-bullet-item" style="display: flex; gap: 12px; align-items: flex-start;">
+                            <span class="nature-icon" style="font-size: 1.25rem; background: var(--bg-primary); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🐬</span>
+                            <div>
+                                <strong style="font-size: 0.9rem; color: var(--text-primary); display: block;">Golfinhos Rotadores (Baía dos Golfinhos)</strong>
+                                <p style="font-size: 0.8rem; color: var(--text-secondary);">Cerca de 30 min antes do amanhecer, grupos de até <strong>1200 golfinhos</strong> entram na baía para descansar após a caçada noturna no mar aberto.</p>
+                            </div>
+                        </div>
+                        <div class="nature-bullet-item" style="display: flex; gap: 12px; align-items: flex-start;">
+                            <span class="nature-icon" style="font-size: 1.25rem; background: var(--bg-primary); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🦈</span>
+                            <div>
+                                <strong style="font-size: 0.9rem; color: var(--text-primary); display: block;">Tubarões Comuns de Noronha</strong>
+                                <p style="font-size: 0.8rem; color: var(--text-secondary);"><strong>Tubarão Limão</strong> (até 3,5 metros, cor amarelo-esverdeada, inofensivo), <strong>Tubarão Lixa</strong> (manso, fica no fundo de areia) e <strong>Tubarão de Galápagos</strong> (até 3 metros, visto no canal).</p>
+                            </div>
+                        </div>
+                        <div class="nature-bullet-item" style="display: flex; gap: 12px; align-items: flex-start;">
+                            <span class="nature-icon" style="font-size: 1.25rem; background: var(--bg-primary); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🪶</span>
+                            <div>
+                                <strong style="font-size: 0.9rem; color: var(--text-primary); display: block;">Pássaros Especiais (Fragatas e Viuvinhas)</strong>
+                                <p style="font-size: 0.8rem; color: var(--text-secondary);"><strong>Fragata</strong> (2,3m envergadura, apelidada de pirata-do-mar pois rouba o peixe de outras aves no ar) e <strong>Viuvinhas</strong> (pequenas, com cauda longa, endêmicas, caçam mergulhando no oceano).</p>
+                            </div>
+                        </div>
+                        <div class="nature-bullet-item" style="display: flex; gap: 12px; align-items: flex-start;">
+                            <span class="nature-icon" style="font-size: 1.25rem; background: var(--bg-primary); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🐋</span>
+                            <div>
+                                <strong style="font-size: 0.9rem; color: var(--text-primary); display: block;">Baleias Jubarte (Temporada Julho - Novembro)</strong>
+                                <p style="font-size: 0.8rem; color: var(--text-secondary);">Cantam e migram perto da costa. Melhores camarotes terrestres: <strong>Mirante dos Golfinhos</strong>, <strong>Forte Nossa Senhora dos Remédios</strong> e <strong>Mirante do Boldró</strong>.</p>
+                            </div>
+                        </div>
+                        <div class="nature-bullet-item" style="display: flex; gap: 12px; align-items: flex-start;">
+                            <span class="nature-icon" style="font-size: 1.25rem; background: var(--bg-primary); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🎬</span>
+                            <div>
+                                <strong style="font-size: 0.9rem; color: var(--text-primary); display: block;">Documentários Incríveis</strong>
+                                <p style="font-size: 0.8rem; color: var(--text-secondary);">
+                                    Assista ao documentário completo antes da viagem: 
+                                    <a href="https://www.youtube.com/watch?v=R7ddKpfalqE" target="_blank" class="btn-link" style="color: var(--sunset); font-weight: 600;"><i class="fa-brands fa-youtube" style="color: #ff0000; margin-right: 4px;"></i> Santuário Marinho</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Official Links & Booking Card -->
+                <div class="app-glass-card official-links-card" style="margin-bottom: 24px;">
+                    <h5><i class="fa-solid fa-scale-balanced text-gold"></i> Agendamentos & Links Oficiais</h5>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px;">Atrativos do Parque Nacional [ParNA] e regras de Guias:</p>
+                    
+                    <div class="booking-status-table-container" style="overflow-x: auto; width: 100%; border: 1px solid var(--glass-border); border-radius: 12px; background: #ffffff;">
+                        <table class="booking-status-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.8rem;">
+                            <thead>
+                                <tr style="background: var(--bg-primary); border-bottom: 1px solid var(--glass-border);">
+                                    <th style="padding: 10px 12px; font-weight: 600; color: var(--text-primary);">Atrativo</th>
+                                    <th style="padding: 10px 12px; font-weight: 600; color: var(--text-primary);">Agendamento</th>
+                                    <th style="padding: 10px 12px; font-weight: 600; color: var(--text-primary);">Precisa Guia?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--glass-border);">
+                                    <td style="padding: 10px 12px; font-weight: 600;">Piscina da Atalaia</td>
+                                    <td style="padding: 10px 12px; color: var(--emerald); font-weight: 600;">Sim [Obrigatório]</td>
+                                    <td style="padding: 10px 12px; color: var(--emerald); font-weight: 600;"><i class="fa-solid fa-circle-check"></i> Não 🥳</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--glass-border);">
+                                    <td style="padding: 10px 12px; font-weight: 600;">Enseada dos Abreu</td>
+                                    <td style="padding: 10px 12px; color: var(--emerald); font-weight: 600;">Sim [Obrigatório]</td>
+                                    <td style="padding: 10px 12px; color: var(--emerald); font-weight: 600;"><i class="fa-solid fa-circle-check"></i> Não 🥳</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--glass-border);">
+                                    <td style="padding: 10px 12px; font-weight: 600;">Piscina do Morro São José</td>
+                                    <td style="padding: 10px 12px; color: var(--emerald); font-weight: 600;">Sim [Obrigatório]</td>
+                                    <td style="padding: 10px 12px; color: var(--sunset); font-weight: 600;"><i class="fa-solid fa-person-swimming"></i> Apenas a nado ⚠️</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--glass-border);">
+                                    <td style="padding: 10px 12px; font-weight: 600;">Trilha Atalaia Pontinha Caieira</td>
+                                    <td style="padding: 10px 12px; color: var(--emerald); font-weight: 600;">Sim [Obrigatório]</td>
+                                    <td style="padding: 10px 12px; color: var(--sunset); font-weight: 600;"><i class="fa-solid fa-triangle-exclamation"></i> Sim ⚠️</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--glass-border);">
+                                    <td style="padding: 10px 12px; font-weight: 600;">Trilha do Capim Açu</td>
+                                    <td style="padding: 10px 12px; color: var(--emerald); font-weight: 600;">Sim [Obrigatório]</td>
+                                    <td style="padding: 10px 12px; color: var(--sunset); font-weight: 600;"><i class="fa-solid fa-triangle-exclamation"></i> Sim ⚠️</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="official-links-buttons" style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
+                        <a href="https://sin-web.noronha.pe.gov.br/pagar_tpa/" target="_blank" class="btn-secondary-link" style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-primary); border: 1.5px solid var(--glass-border); padding: 10px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary); text-decoration: none; transition: var(--transition);"><span style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-receipt text-gold"></i> Pagar Taxa Ambiental (TPA)</span> <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i></a>
+                        <a href="https://agendamento.parnanoronha.com.br/#" target="_blank" class="btn-secondary-link" style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-primary); border: 1.5px solid var(--glass-border); padding: 10px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary); text-decoration: none; transition: var(--transition);"><span style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-calendar-days text-gold"></i> Agendamento de Trilhas ICMBio</span> <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i></a>
+                        <a href="https://agendamento.parnanoronha.com.br/disponibilidades" target="_blank" class="btn-secondary-link" style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-primary); border: 1.5px solid var(--glass-border); padding: 10px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary); text-decoration: none; transition: var(--transition);"><span style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-magnifying-glass-chart text-gold"></i> Vagas de Trilhas em Tempo Real</span> <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i></a>
+                        <a href="https://www.parnanoronha.com.br/condutores" target="_blank" class="btn-secondary-link" style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-primary); border: 1.5px solid var(--glass-border); padding: 10px 14px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; color: var(--text-primary); text-decoration: none; transition: var(--transition);"><span style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-user-tie text-gold"></i> Buscar Guia Credenciado ICMBio</span> <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i></a>
+                    </div>
+
+                    <div class="free-access-beaches" style="margin-top: 15px; border-top: 1px dashed var(--glass-border); padding-top: 12px;">
+                        <strong style="font-size: 0.8rem; color: var(--emerald); display: block; margin-bottom: 8px;"><i class="fa-solid fa-umbrella-beach"></i> PRAIAS DE LIVRE ACESSO (APA - Sem Ingresso):</strong>
+                        <div class="beaches-badge-grid" style="display: flex; flex-wrap: wrap; gap: 6px;">
+                            <span class="beach-badge" style="background: rgba(16, 185, 129, 0.08); color: var(--emerald); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 30px; border: 1.5px solid rgba(16, 185, 129, 0.15);">Cacimba do Padre</span>
+                            <span class="beach-badge" style="background: rgba(16, 185, 129, 0.08); color: var(--emerald); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 30px; border: 1.5px solid rgba(16, 185, 129, 0.15);">Praia do Bode</span>
+                            <span class="beach-badge" style="background: rgba(16, 185, 129, 0.08); color: var(--emerald); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 30px; border: 1.5px solid rgba(16, 185, 129, 0.15);">Praia do Americano</span>
+                            <span class="beach-badge" style="background: rgba(16, 185, 129, 0.08); color: var(--emerald); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 30px; border: 1.5px solid rgba(16, 185, 129, 0.15);">Praia do Boldró</span>
+                            <span class="beach-badge" style="background: rgba(16, 185, 129, 0.08); color: var(--emerald); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 30px; border: 1.5px solid rgba(16, 185, 129, 0.15);">Praia da Conceição</span>
+                            <span class="beach-badge" style="background: rgba(16, 185, 129, 0.08); color: var(--emerald); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 30px; border: 1.5px solid rgba(16, 185, 129, 0.15);">Praia do Meio</span>
+                            <span class="beach-badge" style="background: rgba(16, 185, 129, 0.08); color: var(--emerald); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 30px; border: 1.5px solid rgba(16, 185, 129, 0.15);">Praia do Cachorro</span>
+                            <span class="beach-badge" style="background: rgba(16, 185, 129, 0.08); color: var(--emerald); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 30px; border: 1.5px solid rgba(16, 185, 129, 0.15);">Porto de Santo Antônio</span>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Weather and Info Grid -->
                 <div class="info-widgets-grid">
                     <div class="app-glass-card weather-widget">
@@ -314,6 +535,66 @@
                     <ul class="todo-list" id="todo-items-list">
                         <!-- Dynamic items here -->
                     </ul>
+                </div>
+
+                <!-- Ultimate Trails Preferences List -->
+                <div class="app-glass-card trails-preference-card" style="margin-top: 20px; margin-bottom: 30px;">
+                    <h5><i class="fa-solid fa-mountain-sun text-gold"></i> Planejamento de Trilhas 🧭</h5>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 15px;">Nossas preferências de trilhas e travessias na ilha:</p>
+                    
+                    <div class="trails-list-split">
+                        <div class="trails-want">
+                            <strong style="color: var(--emerald); font-size: 0.8rem; display: block; margin-bottom: 10px;"><i class="fa-solid fa-heart-pulse"></i> TRILHAS QUE QUEREMOS:</strong>
+                            <ul class="preference-list" style="list-style: none; display: flex; flex-direction: column; gap: 10px; padding: 0;">
+                                <li style="display: flex; gap: 8px; align-items: flex-start; font-size: 0.8rem; color: var(--text-primary);">
+                                    <i class="fa-solid fa-circle-check text-emerald" style="margin-top: 2px;"></i>
+                                    <div>
+                                        <strong>Atalaia (Flutuação)</strong>
+                                        <small style="display: block; color: var(--text-secondary); font-size: 0.75rem; margin-top: 2px;">Nível Médio · 3km · Piscina natural berçário · Colete e snorkel obrigatórios · Proibido protetor solar.</small>
+                                    </div>
+                                </li>
+                                <li style="display: flex; gap: 8px; align-items: flex-start; font-size: 0.8rem; color: var(--text-primary);">
+                                    <i class="fa-solid fa-circle-check text-emerald" style="margin-top: 2px;"></i>
+                                    <div>
+                                        <strong>Travessia Morro São José</strong>
+                                        <small style="display: block; color: var(--text-secondary); font-size: 0.75rem; margin-top: 2px;">Nível Difícil · Exige Guia credenciado · Travessia realizada a nado · Colete/snorkel obrigatórios.</small>
+                                    </div>
+                                </li>
+                                <li style="display: flex; gap: 8px; align-items: flex-start; font-size: 0.8rem; color: var(--text-primary);">
+                                    <i class="fa-solid fa-circle-check text-emerald" style="margin-top: 2px;"></i>
+                                    <div>
+                                        <strong>Combo Golfinhos & Sancho</strong>
+                                        <small style="display: block; color: var(--text-secondary); font-size: 0.75rem; margin-top: 2px;">Nível Fácil · Longo · Mirante Dois Irmãos + Cacimba + Porcos + Sancho (horários de subida/descida definidos).</small>
+                                    </div>
+                                </li>
+                                <li style="display: flex; gap: 8px; align-items: flex-start; font-size: 0.8rem; color: var(--text-primary);">
+                                    <i class="fa-solid fa-circle-check text-emerald" style="margin-top: 2px;"></i>
+                                    <div>
+                                        <strong>Forte São Joaquim do Sueste</strong>
+                                        <small style="display: block; color: var(--text-secondary); font-size: 0.75rem; margin-top: 2px;">Nível Fácil · Mirante da baía do Sueste para contemplação e fotos.</small>
+                                    </div>
+                                </li>
+                                <li style="display: flex; gap: 8px; align-items: flex-start; font-size: 0.8rem; color: var(--text-primary);">
+                                    <i class="fa-solid fa-circle-check text-emerald" style="margin-top: 2px;"></i>
+                                    <div>
+                                        <strong>Ponta das Carácas + Praia do Leão</strong>
+                                        <small style="display: block; color: var(--text-secondary); font-size: 0.75rem; margin-top: 2px;">Nível Fácil · Visual selvagem e principal ponto de desova de tartarugas.</small>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="trails-dont-want" style="margin-top: 15px; border-top: 1px dashed var(--glass-border); padding-top: 15px;">
+                            <strong style="color: var(--sunset); font-size: 0.8rem; display: block; margin-bottom: 10px;"><i class="fa-solid fa-circle-xmark"></i> TRILHAS DISPENSADAS:</strong>
+                            <ul class="preference-list outline-list" style="list-style: none; display: flex; flex-direction: column; gap: 8px; padding: 0;">
+                                <li style="display: flex; gap: 8px; font-size: 0.8rem; color: var(--text-secondary);"><i class="fa-solid fa-xmark text-sunset" style="margin-top: 2px;"></i> Piquinho (Medo de altura)</li>
+                                <li style="display: flex; gap: 8px; font-size: 0.8rem; color: var(--text-secondary);"><i class="fa-solid fa-xmark text-sunset" style="margin-top: 2px;"></i> Capim-Açu (Extremamente difícil/longa)</li>
+                                <li style="display: flex; gap: 8px; font-size: 0.8rem; color: var(--text-secondary);"><i class="fa-solid fa-xmark text-sunset" style="margin-top: 2px;"></i> Pontinha Pedra Alta ou Atalaia Longa</li>
+                                <li style="display: flex; gap: 8px; font-size: 0.8rem; color: var(--text-secondary);"><i class="fa-solid fa-xmark text-sunset" style="margin-top: 2px;"></i> Trilha do Farol (Caminhada sob mata, sem banho de mar)</li>
+                                <li style="display: flex; gap: 8px; font-size: 0.8rem; color: var(--text-secondary);"><i class="fa-solid fa-xmark text-sunset" style="margin-top: 2px;"></i> Enseada dos Abreu</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>

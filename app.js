@@ -203,27 +203,28 @@ const SPOTS_DATA = [
 // Daily Itinerary
 const ITINERARY_DATA = {
     1: {
-        title: "Dia 1: Chegada & Pôr do Sol",
+        title: "Dia 1: Chegada & Pôr do Sol no Porto ⛵",
         date: "Sexta-feira, 10 de Julho de 2026",
         badge: "Chegada",
         timeline: [
-            { time: "Tarde", title: "Pouso em Noronha! ✈️", desc: "Desembarque no paraíso e pagamento da taxa ambiental (se não feita online). O transfer gratuito da Pousada Maresia estará nos esperando no aeroporto.", highlight: true },
-            { time: "14:00 - 17:00", title: "Check-in na Pousada Maresia 🏨", desc: "Instalação na pousada na Vila dos Remédios, guardar as malas, trocar de roupa e aplicar protetor solar." },
-            { time: "16:00", title: "Reconhecimento da Vila 🚶‍♂️🚶‍♀️", desc: "Caminhada rápida pelo centrinho histórico (mercados, farmácias, restaurantes) que fica bem próximo de nós." },
-            { time: "17:15", title: "Pôr do sol na Praia da Conceição 🌅", desc: "Primeiro pôr do sol inesquecível ao pé do gigante Morro do Pico, sentindo a energia da ilha." },
-            { time: "Noite", title: "Jantar na Vila dos Remédios 🍽️", desc: "Comemoração de chegada em um dos charmosos restaurantes da praça principal." }
+            { time: "13:40", title: "Pouso em Noronha! ✈️", desc: "Chegada no aeroporto às 13:40. O transfer gratuito oferecido pela Pousada Maresia estará aguardando para nos levar à pousada.", highlight: true },
+            { time: "14:00", title: "Check-in na Pousada Maresia 🏨", desc: "Acomodação no quarto, desfazer mochilas, vestir roupas leves de praia e passar protetor." },
+            { time: "Tarde", title: "Almoço da Chegada 🍽️", desc: "Almoçar peixe fresco na Praia da Conceição ou Praia do Cachorro, com parada clássica no Bar da Praia do Meio." },
+            { time: "17:00", title: "Pôr do Sol na Praia do Porto 🌅", desc: "Curtir o fim do dia na praia do Porto. Alugaremos Bike Aquática para navegar pertinho dos golfinhos rotadores!", highlight: true },
+            { time: "Fim do Dia", title: "Banho & Mercadinho 🛒", desc: "Voltar para a pousada para banho e passar no mercadinho local para comprar água, lanchinhos e frutas." },
+            { time: "Noite", title: "Jantar & Caminhada Noturna 🌙", desc: "Jantar no centro histórico (Vila dos Remédios) seguido de uma romântica caminhada noturna na Praia do Cachorro." }
         ]
     },
     2: {
-        title: "Dia 2: Mergulho no Porto & Forte Boldró",
+        title: "Dia 2: O Super Combo Sancho & Boldró 🏖️",
         date: "Sábado, 11 de Julho de 2026",
-        badge: "Snorkel",
+        badge: "Intenso",
         timeline: [
-            { time: "08:00", title: "Café da manhã na Pousada ☕", desc: "Café reforçado para aguentar o dia na água." },
-            { time: "09:00", title: "Snorkel na Praia do Porto 🤿", desc: "Mergulho nas águas calmas do porto. Vamos nadar até o Naufrágio do Navio Grego, lar de tartarugas e raias!", highlight: true },
-            { time: "Almoço", title: "Quiosque do Porto 🐟", desc: "Almoçar peixe fresco grelhado à beira-mar." },
-            { time: "Tarde", title: "Praia da Conceição (Canto das Pedras)", desc: "Mergulhar nas piscinas do canto direito da Conceição e relaxar sob as sombras." },
-            { time: "17:00", title: "Pôr do sol no Forte do Boldró 🌇", desc: "Subir até as ruínas do forte para contemplar o pôr do sol clássico de Noronha, com o Dois Irmãos em destaque." }
+            { time: "09:00", title: "Café da Manhã na Pousada ☕", desc: "Desfrutar do delicioso café da manhã regional às 9h para estarmos com toda energia." },
+            { time: "09:45 - 15:30", title: "Super Combo de Praias e Mirantes 🌴", desc: "Cacimba do Padre > Mirante Dois Irmãos > Mirante Baía dos Porcos > Praia Baía dos Porcos > Mirante Sancho > Praia do Sancho (atenção aos horários regulamentados de subida/descida das escadas!) > Mirante dos Golfinhos.", highlight: true },
+            { time: "16:00 - 17:30", title: "Trilha do Pôr do Sol no Boldró 🌇", desc: "Caminhar pela beira-mar passando pelas praias Cacimba > Bode > Americano. Finalizaremos assistindo ao espetacular pôr do sol no tradicional Mirante do Boldró." },
+            { time: "20:00", title: "Jantar Especial + Bolo! 🎂", desc: "Jantar comemorativo em casal com direito a um bolo delicioso para comemorar em grande estilo.", highlight: true },
+            { time: "Noite Adentro", title: "Caminhada sob o Luar 🌌", desc: "Andar de mãos dadas à noite ao longo da Praia da Conceição sob o céu estrelado." }
         ]
     },
     3: {
@@ -273,13 +274,16 @@ const ITINERARY_DATA = {
         ]
     },
     7: {
-        title: "Dia 7: Volta para Casa",
+        title: "Dia 7: Trilha Atalaia & Volta para Casa ✈️",
         date: "Quinta-feira, 16 de Julho de 2026",
         badge: "Retorno",
         timeline: [
-            { time: "08:30", title: "Último café e Malas 🧳", desc: "Aproveitar o café da manhã e fazer o checklist da mala para não esquecer nada." },
-            { time: "12:00", title: "Check-out na Pousada 🚪", desc: "Realizar o fechamento da conta na pousada Maresia." },
-            { time: "Tarde", title: "Transfer & Aeroporto ✈️", desc: "O transfer gratuito da pousada nos levará ao Aeroporto de Fernando de Noronha para o voo de volta para casa." }
+            { time: "08:00", title: "Café da Manhã & Malas 🧳", desc: "Tomar o café com tranquilidade e fazer o checklist final da mala." },
+            { time: "11:30", title: "Almoço de Despedida 🍽️", desc: "Almoçar cedo para estarmos prontos para o horário da trilha." },
+            { time: "12:00 - 13:30", title: "Trilha & Flutuação no Atalaia 🌊", desc: "Caminhada de 3km ida/volta. Obrigatório portar máscara, snorkel e colete. Atenção extrema: proibido usar protetor solar ou repelente na água!", highlight: true },
+            { time: "13:30 - 14:30", title: "Banho & Check-out na Pousada 🏨", desc: "Voltar correndo para a Pousada Maresia para um banho rápido e finalizar o check-out até as 14h30." },
+            { time: "15:00", title: "Chegada no Aeroporto ✈️", desc: "O transfer nos deixará no aeroporto para despachar as malas." },
+            { time: "15:40", title: "Voo decola de Noronha 🛫", desc: "Embarque de volta para o continente levando Noronha no coração." }
         ]
     }
 };
