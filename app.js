@@ -46,6 +46,39 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Edit Drawer Actions
+    const openEditBtn = document.getElementById("btn-open-edit");
+    if (openEditBtn) {
+        openEditBtn.addEventListener("click", () => {
+            openEditDrawer();
+        });
+    }
+
+    const closeEditBtn = document.getElementById("btn-close-edit");
+    if (closeEditBtn) {
+        closeEditBtn.addEventListener("click", () => {
+            closeEditDrawer();
+        });
+    }
+
+    const editDetailsForm = document.getElementById("edit-details-form");
+    if (editDetailsForm) {
+        editDetailsForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            localStorage.setItem("noronha_pousada_name", document.getElementById("edit-pousada-name").value.trim());
+            localStorage.setItem("noronha_pousada_reserva", document.getElementById("edit-pousada-reserva").value.trim());
+            localStorage.setItem("noronha_pousada_pin", document.getElementById("edit-pousada-pin").value.trim());
+            localStorage.setItem("noronha_flight_loc", document.getElementById("edit-flight-loc").value.trim().toUpperCase());
+            localStorage.setItem("noronha_flight_req", document.getElementById("edit-flight-req").value.trim());
+            localStorage.setItem("noronha_cpf_gio", document.getElementById("edit-cpf-gio").value.trim());
+            localStorage.setItem("noronha_cpf_renan", document.getElementById("edit-cpf-renan").value.trim());
+
+            loadSavedDetails();
+            closeEditDrawer();
+            showToast("Informações salvas! 🌴");
+        });
+    }
+
     // Initialize all app components
     initApp();
 });
@@ -291,6 +324,7 @@ const ITINERARY_DATA = {
 // ================= APP INITIALIZER =================
 
 function initApp() {
+    loadSavedDetails();
     initCountdown();
     initTabs();
     initItinerary();
@@ -901,4 +935,80 @@ function showToast(message) {
             toast.classList.add("hidden");
         }, 400);
     }, 2500);
+}
+
+// ================= EDIT DRAWER CONTROLLER =================
+
+function openEditDrawer() {
+    document.getElementById("edit-pousada-name").value = localStorage.getItem("noronha_pousada_name") || "Pousada Maresia";
+    document.getElementById("edit-pousada-reserva").value = localStorage.getItem("noronha_pousada_reserva") || "5007217316";
+    document.getElementById("edit-pousada-pin").value = localStorage.getItem("noronha_pousada_pin") || "4776";
+    document.getElementById("edit-flight-loc").value = localStorage.getItem("noronha_flight_loc") || "NPGIBT";
+    document.getElementById("edit-flight-req").value = localStorage.getItem("noronha_flight_req") || "3963411";
+    document.getElementById("edit-cpf-gio").value = localStorage.getItem("noronha_cpf_gio") || "485.052.028-64";
+    document.getElementById("edit-cpf-renan").value = localStorage.getItem("noronha_cpf_renan") || "449.227.578-99";
+
+    const drawer = document.getElementById("edit-drawer");
+    if (drawer) {
+        drawer.classList.remove("hidden");
+        setTimeout(() => {
+            drawer.classList.add("active");
+        }, 10);
+    }
+}
+
+function closeEditDrawer() {
+    const drawer = document.getElementById("edit-drawer");
+    if (drawer && drawer.classList.contains("active")) {
+        drawer.classList.remove("active");
+        setTimeout(() => {
+            drawer.classList.add("hidden");
+        }, 300);
+    }
+}
+
+function loadSavedDetails() {
+    const pousadaName = localStorage.getItem("noronha_pousada_name") || "Pousada Maresia";
+    const pousadaReserva = localStorage.getItem("noronha_pousada_reserva") || "5007217316";
+    const pousadaPin = localStorage.getItem("noronha_pousada_pin") || "4776";
+    const flightLoc = localStorage.getItem("noronha_flight_loc") || "NPGIBT";
+    const flightReq = localStorage.getItem("noronha_flight_req") || "3963411";
+    const cpfGio = localStorage.getItem("noronha_cpf_gio") || "485.052.028-64";
+    const cpfRenan = localStorage.getItem("noronha_cpf_renan") || "449.227.578-99";
+
+    // Update UI elements
+    const displayPousadaName = document.getElementById("display-pousada-name");
+    if (displayPousadaName) displayPousadaName.innerText = pousadaName;
+
+    const displayReserva = document.getElementById("reserva-num");
+    if (displayReserva) displayReserva.innerText = pousadaReserva;
+
+    const displayPin = document.getElementById("pin-code");
+    if (displayPin) displayPin.innerText = pousadaPin;
+
+    const displayFlightLoc = document.getElementById("flight-loc");
+    if (displayFlightLoc) displayFlightLoc.innerText = flightLoc;
+
+    const displayFlightReq = document.getElementById("flight-req");
+    if (displayFlightReq) displayFlightReq.innerText = flightReq;
+
+    const displayCpfGio = document.getElementById("display-cpf-gio");
+    if (displayCpfGio) displayCpfGio.innerText = "CPF: " + cpfGio;
+
+    const displayCpfRenan = document.getElementById("display-cpf-renan");
+    if (displayCpfRenan) displayCpfRenan.innerText = "CPF: " + cpfRenan;
+
+    // Regenerate QR Codes
+    const cleanCpfGio = cpfGio.replace(/\D/g, "");
+    const cleanCpfRenan = cpfRenan.replace(/\D/g, "");
+
+    const qrGio = document.getElementById("display-qr-gio");
+    if (qrGio) {
+        qrGio.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Participante%3A%20Giovanna%20Farnezi%20Silva%0ACPF%3A%20${cleanCpfGio}%0AAtalaia%2016%2F07%2F2026%2012%3A30`;
+    }
+
+    const qrRenan = document.getElementById("display-qr-renan");
+    if (qrRenan) {
+        qrRenan.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Participante%3A%20Renan%20Donadeli%20Anhezini%0ACPF%3A%20${cleanCpfRenan}%0AAtalaia%2016%2F07%2F2026%2012%3A30`;
+    }
 }

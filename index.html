@@ -56,6 +56,7 @@
                 <div class="countdown-pill" id="countdown-pill">
                     <span id="days-pill">00</span>d <span id="hours-pill">00</span>h
                 </div>
+                <button id="btn-open-edit" class="profile-btn" title="Editar Informações" style="background: rgba(202, 162, 82, 0.08); color: var(--gold-dark); border: none;"><i class="fa-solid fa-pen-to-square"></i></button>
                 <button id="btn-logout" class="profile-btn" title="Sair"><i class="fa-solid fa-right-from-bracket"></i></button>
             </div>
         </header>
@@ -90,7 +91,7 @@
                     <div class="pass-top">
                         <div class="pass-title">
                             <span class="badge-gold">HOSPEDAGEM CONFIRMADA</span>
-                            <h4>Pousada Maresia</h4>
+                            <h4 id="display-pousada-name">Pousada Maresia</h4>
                         </div>
                         <i class="fa-solid fa-hotel pass-icon"></i>
                     </div>
@@ -218,10 +219,10 @@
                         <div class="voucher-ticket" style="flex: 1; min-width: 220px; background: #ffffff; border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 15px; box-shadow: var(--shadow-premium); text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
                             <div class="ticket-header" style="margin-bottom: 12px; border-bottom: 1px dashed var(--glass-border); padding-bottom: 8px;">
                                 <strong style="font-size: 0.9rem; display: block; color: var(--text-primary);">Giovanna Farnezi Silva</strong>
-                                <small style="font-size: 0.75rem; color: var(--text-secondary);">CPF: 485.052.028-64</small>
+                                <small id="display-cpf-gio" style="font-size: 0.75rem; color: var(--text-secondary);">CPF: 485.052.028-64</small>
                             </div>
                             <div class="ticket-qr-area" style="background: #fafafa; padding: 10px; border-radius: 8px; margin-bottom: 12px; display: inline-block;">
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Participante%3A%20Giovanna%20Farnezi%20Silva%0ACPF%3A%2048505202864%0AAtalaia%2016%2F07%2F2026%2012%3A30" alt="QR Code Giovanna" style="width: 120px; height: 120px; vertical-align: middle;">
+                                <img id="display-qr-gio" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Participante%3A%20Giovanna%20Farnezi%20Silva%0ACPF%3A%2048505202864%0AAtalaia%2016%2F07%2F2026%2012%3A30" alt="QR Code Giovanna" style="width: 120px; height: 120px; vertical-align: middle;">
                             </div>
                             <div class="ticket-footer">
                                 <span class="badge-gold" style="font-size: 0.7rem; padding: 3px 8px; margin: 0;">ATALAIA 12:30</span>
@@ -232,10 +233,10 @@
                         <div class="voucher-ticket" style="flex: 1; min-width: 220px; background: #ffffff; border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 15px; box-shadow: var(--shadow-premium); text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
                             <div class="ticket-header" style="margin-bottom: 12px; border-bottom: 1px dashed var(--glass-border); padding-bottom: 8px;">
                                 <strong style="font-size: 0.9rem; display: block; color: var(--text-primary);">Renan Donadeli Anhezini</strong>
-                                <small style="font-size: 0.75rem; color: var(--text-secondary);">CPF: 449.227.578-99</small>
+                                <small id="display-cpf-renan" style="font-size: 0.75rem; color: var(--text-secondary);">CPF: 449.227.578-99</small>
                             </div>
                             <div class="ticket-qr-area" style="background: #fafafa; padding: 10px; border-radius: 8px; margin-bottom: 12px; display: inline-block;">
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Participante%3A%20Renan%20Donadeli%20Anhezini%0ACPF%3A%2044922757899%0AAtalaia%2016%2F07%2F2026%2012%3A30" alt="QR Code Renan" style="width: 120px; height: 120px; vertical-align: middle;">
+                                <img id="display-qr-renan" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Participante%3A%20Renan%20Donadeli%20Anhezini%0ACPF%3A%2044922757899%0AAtalaia%2016%2F07%2F2026%2012%3A30" alt="QR Code Renan" style="width: 120px; height: 120px; vertical-align: middle;">
                             </div>
                             <div class="ticket-footer">
                                 <span class="badge-gold" style="font-size: 0.7rem; padding: 3px 8px; margin: 0;">ATALAIA 12:30</span>
@@ -618,6 +619,74 @@
                 <span>Mala</span>
             </button>
         </nav>
+    </div>
+
+    <!-- Slide Up Edit Details Drawer -->
+    <div id="edit-drawer" class="map-drawer-sheet hidden">
+        <div class="drawer-handler" id="edit-drawer-handle"></div>
+        <div class="drawer-content" style="padding-bottom: 24px;">
+            <div class="drawer-header" style="margin-bottom: 15px; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="margin: 0; font-size: 1.15rem;"><i class="fa-solid fa-pen-to-square text-gold"></i> Editar Informações</h3>
+                <button class="close-modal-btn" id="btn-close-edit" style="background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-secondary);"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <form id="edit-details-form" style="display: flex; flex-direction: column; gap: 15px; max-height: 60vh; overflow-y: auto; padding-right: 5px; padding-bottom: 80px;">
+                <!-- Hospedagem Group -->
+                <div class="edit-group" style="border: 1px solid var(--glass-border); padding: 12px; border-radius: var(--radius-md); background: rgba(0,0,0,0.01);">
+                    <strong style="font-size: 0.85rem; color: var(--gold-dark); display: block; margin-bottom: 8px;"><i class="fa-solid fa-hotel"></i> Hospedagem (Pousada)</strong>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div>
+                            <label style="font-size: 0.75rem; color: var(--text-secondary); display: block; margin-bottom: 3px;">Nome da Pousada</label>
+                            <input type="text" id="edit-pousada-name" style="width: 100%; padding: 8px; border: 1.5px solid var(--glass-border); border-radius: 8px; font-size: 0.85rem;" required>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <div style="flex: 1;">
+                                <label style="font-size: 0.75rem; color: var(--text-secondary); display: block; margin-bottom: 3px;">Reserva</label>
+                                <input type="text" id="edit-pousada-reserva" style="width: 100%; padding: 8px; border: 1.5px solid var(--glass-border); border-radius: 8px; font-size: 0.85rem;" required>
+                            </div>
+                            <div style="flex: 1;">
+                                <label style="font-size: 0.75rem; color: var(--text-secondary); display: block; margin-bottom: 3px;">Código PIN</label>
+                                <input type="text" id="edit-pousada-pin" style="width: 100%; padding: 8px; border: 1.5px solid var(--glass-border); border-radius: 8px; font-size: 0.85rem;" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Voos Group -->
+                <div class="edit-group" style="border: 1px solid var(--glass-border); padding: 12px; border-radius: var(--radius-md); background: rgba(0,0,0,0.01);">
+                    <strong style="font-size: 0.85rem; color: var(--sunset); display: block; margin-bottom: 8px;"><i class="fa-solid fa-plane"></i> Passagem Aérea (GOL)</strong>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div style="display: flex; gap: 10px;">
+                            <div style="flex: 1;">
+                                <label style="font-size: 0.75rem; color: var(--text-secondary); display: block; margin-bottom: 3px;">Localizador</label>
+                                <input type="text" id="edit-flight-loc" style="width: 100%; padding: 8px; border: 1.5px solid var(--glass-border); border-radius: 8px; font-size: 0.85rem;" required>
+                            </div>
+                            <div style="flex: 1;">
+                                <label style="font-size: 0.75rem; color: var(--text-secondary); display: block; margin-bottom: 3px;">Nº do Pedido</label>
+                                <input type="text" id="edit-flight-req" style="width: 100%; padding: 8px; border: 1.5px solid var(--glass-border); border-radius: 8px; font-size: 0.85rem;" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Atalaia Group -->
+                <div class="edit-group" style="border: 1px solid var(--glass-border); padding: 12px; border-radius: var(--radius-md); background: rgba(0,0,0,0.01);">
+                    <strong style="font-size: 0.85rem; color: var(--turquoise-dark); display: block; margin-bottom: 8px;"><i class="fa-solid fa-qrcode"></i> Vouchers Atalaia</strong>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div>
+                            <label style="font-size: 0.75rem; color: var(--text-secondary); display: block; margin-bottom: 3px;">CPF Giovanna</label>
+                            <input type="text" id="edit-cpf-gio" style="width: 100%; padding: 8px; border: 1.5px solid var(--glass-border); border-radius: 8px; font-size: 0.85rem;" required>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.75rem; color: var(--text-secondary); display: block; margin-bottom: 3px;">CPF Renan</label>
+                            <input type="text" id="edit-cpf-renan" style="width: 100%; padding: 8px; border: 1.5px solid var(--glass-border); border-radius: 8px; font-size: 0.85rem;" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-glow-primary" style="width: 100%; padding: 12px; font-weight: 700; border-radius: 12px; font-size: 0.95rem; margin-top: 10px; background: linear-gradient(135deg, var(--turquoise-medium) 0%, var(--turquoise-dark) 100%); color: white; border: none; cursor: pointer;">Salvar Alterações</button>
+            </form>
+        </div>
     </div>
 
     <!-- Toast popup -->
