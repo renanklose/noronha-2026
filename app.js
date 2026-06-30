@@ -68,6 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem("noronha_pousada_name", document.getElementById("edit-pousada-name").value.trim());
             localStorage.setItem("noronha_pousada_reserva", document.getElementById("edit-pousada-reserva").value.trim());
             localStorage.setItem("noronha_pousada_pin", document.getElementById("edit-pousada-pin").value.trim());
+            localStorage.setItem("noronha_pousada_address", document.getElementById("edit-pousada-address").value.trim());
+            localStorage.setItem("noronha_pousada_whatsapp", document.getElementById("edit-pousada-whatsapp").value.trim());
             localStorage.setItem("noronha_flight_loc", document.getElementById("edit-flight-loc").value.trim().toUpperCase());
             localStorage.setItem("noronha_flight_req", document.getElementById("edit-flight-req").value.trim());
             localStorage.setItem("noronha_cpf_gio", document.getElementById("edit-cpf-gio").value.trim());
@@ -104,7 +106,7 @@ const SPOTS_DATA = [
     {
         id: "lodging",
         name: "Pousada Maresia 🏨",
-        coords: [-3.8415, -32.4124],
+        coords: [2207, 2650],
         description: "Nossa pousada charmosa na Vila dos Remédios. Localização espetacular: pertinho da praça principal, mercados, farmácias e ótimos restaurantes. Ar-condicionado, Wi-Fi e um café da manhã delicioso para recarregar as energias.",
         tags: ["special"],
         tip: "O transfer gratuito de ida/volta para o aeroporto está incluído! Lembre-se de confirmar o horário de pouso com eles.",
@@ -114,7 +116,7 @@ const SPOTS_DATA = [
     {
         id: "sancho",
         name: "Praia do Sancho 🌊",
-        coords: [-3.8546, -32.4431],
+        coords: [2183, 1298],
         description: "Considerada múltiplas vezes a praia mais bonita do mundo. Cercada por falésias majestosas, com água cristalina cor de esmeralda. O acesso é feito descendo escadas de metal encravadas na rocha.",
         tags: ["snorkel", "special"],
         tip: "Consulte a tábua de marés. É obrigatório o uso de coletes salva-vidas em algumas áreas e há horários específicos para descer/subir as escadas.",
@@ -124,7 +126,7 @@ const SPOTS_DATA = [
     {
         id: "porcos",
         name: "Baía dos Porcos 🐠",
-        coords: [-3.8504, -32.4339],
+        coords: [2263, 1454],
         description: "Uma jóia selvagem e rochosa. Forma piscinas naturais incríveis na maré baixa. Um dos melhores pontos de mergulho livre (snorkel) da ilha para nadar com peixes coloridos e tartarugas.",
         tags: ["snorkel", "special"],
         tip: "Acesso por uma pequena trilha de pedras a partir do canto esquerdo da praia da Cacimba do Padre. Vá de sapatilha de neoprene!",
@@ -134,7 +136,7 @@ const SPOTS_DATA = [
     {
         id: "cacimba",
         name: "Cacimba do Padre 🏝️",
-        coords: [-3.8497, -32.4312],
+        coords: [2286, 1780],
         description: "Praia de areia fofa e o clássico cartão-postal com vista direta para o Morro Dois Irmãos. No verão é palco de campeonatos de surfe com ondas gigantes, no inverno de julho as águas costumam ser bem mais mansas.",
         tags: ["snorkel"],
         tip: "Ponto perfeito para fotos na areia com os 'Dois Irmãos' ao fundo ao entardecer.",
@@ -144,7 +146,7 @@ const SPOTS_DATA = [
     {
         id: "porto",
         name: "Praia do Porto ⚓",
-        coords: [-3.8347, -32.4035],
+        coords: [2247, 2888],
         description: "Área de ancoragem das embarcações com rica vida marinha. Excelente para fazer snorkel perto do Naufrágio do Navio Grego, onde costumam aparecer raias chitas, tartarugas e tubarões.",
         tags: ["snorkel"],
         tip: "Dá para alugar caiaque, stand-up paddle ou fazer o famoso passeio de canoa havaiana aqui logo cedo.",
@@ -154,7 +156,7 @@ const SPOTS_DATA = [
     {
         id: "leao",
         name: "Praia do Leão 🐢",
-        coords: [-3.8647, -32.4330],
+        coords: [1974, 1509],
         description: "Lado mar de fora. Praia de beleza selvagem, de areia avermelhada e cercada por duas grandes rochas (o Leão e a Viuvinha). É o principal berçário e local de desova das tartarugas marinhas na ilha.",
         tags: ["special"],
         tip: "Correntes muito fortes. Evite entrar no fundo do mar, prefira caminhar pela areia e contemplar os ninhos marcados pelo Projeto Tamar.",
@@ -164,7 +166,7 @@ const SPOTS_DATA = [
     {
         id: "conceicao",
         name: "Praia da Conceição 🌅",
-        coords: [-3.8427, -32.4172],
+        coords: [2333, 2486],
         description: "Grande faixa de areia sob a imponência do Morro do Pico. Um dos pontos mais badalados da ilha, com quadras de futevôlei e o Bar do Meio nas proximidades. Excelentes mergulhos nas pedras do canto direito.",
         tags: ["snorkel", "sunset"],
         tip: "Perfeito para estender a canga no final da tarde e ver o sol se esconder ao lado do Morro do Pico.",
@@ -174,17 +176,17 @@ const SPOTS_DATA = [
     {
         id: "museu-tubaroes",
         name: "Museu dos Tubarões 🌝",
-        coords: [-3.8322, -32.4005],
+        coords: [2357, 3000],
         description: "Um museu interessante sobre a fauna marinha da ilha e um mirante gramado lindíssimo. Na maré baixa, dá para avistar tubarões limpando-se no raso da baía logo abaixo (Enseada dos Cações).",
         tags: ["sunrise", "special"],
-        tip: "Nosso passeio obrigatório na noite de 14 de Julho para ver o nascer da deslumbrante Lua Cheia sobre o mar! 🌝",
-        icon: "fa-solid fa-moon",
+        tip: "Dá para avistar tubarões nadando no rasinho nas primeiras horas do dia ou na maré seca.",
+        icon: "fa-solid fa-fish-fins",
         color: "marker-special"
     },
     {
         id: "forte-boldro",
         name: "Mirante do Forte do Boldró 🌇",
-        coords: [-3.8490, -32.4280],
+        coords: [2247, 2200],
         description: "Ruínas de uma antiga fortificação no alto de uma falésia. É o ponto mais tradicional, romântico e concorrido da ilha para assistir ao pôr do sol clássico de Noronha.",
         tags: ["sunset", "special"],
         tip: "Chegue uns 30 a 40 minutos antes do sol se pôr para conseguir um bom espaço e tirar fotos incríveis com o Morro Dois Irmãos alinhado.",
@@ -194,7 +196,7 @@ const SPOTS_DATA = [
     {
         id: "capelinha",
         name: "Capelinha de São Pedro ⛪",
-        coords: [-3.8335, -32.4015],
+        coords: [2317, 2850],
         description: "Pequena e charmosa capela localizada no alto do Porto de Santo Antônio. Oferece uma perspectiva aérea incrível da baía, dos barcos flutuando e do oceano.",
         tags: ["sunrise"],
         tip: "Ponto super pacífico e bonito para assistir ao nascer do sol.",
@@ -204,7 +206,7 @@ const SPOTS_DATA = [
     {
         id: "air-france",
         name: "Ponta do Air France ⛵",
-        coords: [-3.8300, -32.4000],
+        coords: [2427, 3065],
         description: "Local histórico onde ficava a base da companhia aérea francesa na década de 30. Fica no extremo norte da ilha, onde o Mar de Dentro encontra o bravio Mar de Fora.",
         tags: ["sunrise"],
         tip: "Ótimo ponto para observar o nascer do sol e sentir o vento forte do oceano.",
@@ -214,7 +216,7 @@ const SPOTS_DATA = [
     {
         id: "bode",
         name: "Praia do Bode 🌅",
-        coords: [-3.8480, -32.4290],
+        coords: [2308, 1982],
         description: "Praia de mar calmo na maré baixa, vizinha da Cacimba do Padre. Possui poços de pedra ótimos para banho e é muito procurada para quem quer sossego.",
         tags: ["sunset"],
         tip: "Uma ótima alternativa para fugir do agito e curtir o pôr do sol em silêncio.",
@@ -224,7 +226,7 @@ const SPOTS_DATA = [
     {
         id: "boldro-praia",
         name: "Praia do Boldró 🌅",
-        coords: [-3.8465, -32.4260],
+        coords: [2293, 2289],
         description: "Praia charmosa com piscinas naturais de recifes vulcânicos que se revelam na maré seca. Fica aos pés do famoso Mirante do Forte.",
         tags: ["sunset"],
         tip: "Na maré baixa, caminhar entre as rochas e ver peixes ornamentais aprisionados nas pequenas poças.",
@@ -329,6 +331,8 @@ function initApp() {
     initTabs();
     initItinerary();
     initChecklist();
+    initTides();
+    checkTrailAvailability();
     
     // Map is initialized lazily when switching to tab-map or on first display if auth is already bypassed
     if (sessionStorage.getItem("noronha_auth") === "true") {
@@ -420,24 +424,24 @@ let currentDrawerSpotId = null;
 function initMap() {
     if (mapInstance) return; // Prevent double initialization
     
-    // Center of Fernando de Noronha
-    const center = [-3.844, -32.414];
+    // Bounds of the official_map.png image: 3657x2467 pixels
+    const bounds = [[0, 0], [2467, 3657]];
     
-    // Create map instance
+    // Create map instance with Simple Coordinate system
     mapInstance = L.map('map', {
-        center: center,
-        zoom: 13.2,
-        minZoom: 12,
-        maxZoom: 17,
-        zoomControl: true
+        crs: L.CRS.Simple,
+        minZoom: -3.5,
+        maxZoom: 1.5,
+        zoomControl: true,
+        bounds: bounds,
+        maxBounds: bounds
     });
 
-    // Add CartoDB Positron tile layer (Light Mode)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 20
-    }).addTo(mapInstance);
+    // Add the official PNG map drawing as an image overlay
+    L.imageOverlay('oficial_map.png', bounds).addTo(mapInstance);
+
+    // Set initial view centered on the island bounds
+    mapInstance.fitBounds(bounds);
 
     // Custom marker style generator using divIcon
     const createCustomIcon = (iconClass, colorClass) => {
@@ -467,50 +471,10 @@ function initMap() {
 
         // Custom action on marker click: open slide up drawer
         marker.on('click', () => {
-            mapInstance.setView(spot.coords, 14.5);
+            mapInstance.setView(spot.coords, -0.5);
             openDrawer(spot.id);
         });
     });
-
-    // Drawing Trails (Polylines)
-    // 1. Trilha do Sancho (wooden walkways)
-    const sanchoTrail = [
-        [-3.8546, -32.4431], // Sancho Beach
-        [-3.8530, -32.4420], // Sancho Viewpoint
-        [-3.8510, -32.4410], // Sancho Access Road
-    ];
-    L.polyline(sanchoTrail, {
-        color: 'var(--gold)',
-        weight: 3,
-        dashArray: '5, 8',
-        opacity: 0.85
-    }).addTo(mapInstance).bindTooltip("Trilha do Sancho (Fácil)", { sticky: true });
-
-    // 2. Trilha do Piquinho
-    const piquinhoTrail = [
-        [-3.8415, -32.4124], // Start near Vila
-        [-3.8425, -32.4170], // Base of Pico
-        [-3.8440, -32.4210], // Morro do Pico/Piquinho Peak
-    ];
-    L.polyline(piquinhoTrail, {
-        color: 'var(--sunset)',
-        weight: 3.5,
-        dashArray: '5, 8',
-        opacity: 0.85
-    }).addTo(mapInstance).bindTooltip("Trilha do Piquinho (Moderada)", { sticky: true });
-
-    // 3. Trilha Baía dos Porcos (from Cacimba)
-    const porcosTrail = [
-        [-3.8497, -32.4312], // Cacimba do Padre
-        [-3.8501, -32.4325], // Rocks path
-        [-3.8504, -32.4339], // Baía dos Porcos
-    ];
-    L.polyline(porcosTrail, {
-        color: 'var(--emerald)',
-        weight: 3.5,
-        dashArray: '3, 6',
-        opacity: 0.9
-    }).addTo(mapInstance).bindTooltip("Trilha Baía dos Porcos (Pedras)", { sticky: true });
 
     // Close drawer when clicking anywhere on the map
     mapInstance.on('click', () => {
@@ -943,6 +907,8 @@ function openEditDrawer() {
     document.getElementById("edit-pousada-name").value = localStorage.getItem("noronha_pousada_name") || "Pousada Maresia";
     document.getElementById("edit-pousada-reserva").value = localStorage.getItem("noronha_pousada_reserva") || "5007217316";
     document.getElementById("edit-pousada-pin").value = localStorage.getItem("noronha_pousada_pin") || "4776";
+    document.getElementById("edit-pousada-address").value = localStorage.getItem("noronha_pousada_address") || "Rua Amaro Preto, 480 - Vila do Boldró";
+    document.getElementById("edit-pousada-whatsapp").value = localStorage.getItem("noronha_pousada_whatsapp") || "+55 (81) 99999-9999";
     document.getElementById("edit-flight-loc").value = localStorage.getItem("noronha_flight_loc") || "NPGIBT";
     document.getElementById("edit-flight-req").value = localStorage.getItem("noronha_flight_req") || "3963411";
     document.getElementById("edit-cpf-gio").value = localStorage.getItem("noronha_cpf_gio") || "485.052.028-64";
@@ -971,6 +937,8 @@ function loadSavedDetails() {
     const pousadaName = localStorage.getItem("noronha_pousada_name") || "Pousada Maresia";
     const pousadaReserva = localStorage.getItem("noronha_pousada_reserva") || "5007217316";
     const pousadaPin = localStorage.getItem("noronha_pousada_pin") || "4776";
+    const pousadaAddress = localStorage.getItem("noronha_pousada_address") || "Rua Amaro Preto, 480 - Vila do Boldró";
+    const pousadaWhatsapp = localStorage.getItem("noronha_pousada_whatsapp") || "+55 (81) 99999-9999";
     const flightLoc = localStorage.getItem("noronha_flight_loc") || "NPGIBT";
     const flightReq = localStorage.getItem("noronha_flight_req") || "3963411";
     const cpfGio = localStorage.getItem("noronha_cpf_gio") || "485.052.028-64";
@@ -985,6 +953,19 @@ function loadSavedDetails() {
 
     const displayPin = document.getElementById("pin-code");
     if (displayPin) displayPin.innerText = pousadaPin;
+
+    const displayAddress = document.getElementById("pousada-address");
+    if (displayAddress) displayAddress.innerText = pousadaAddress;
+
+    const displayWhatsapp = document.getElementById("pousada-whatsapp");
+    if (displayWhatsapp) {
+        displayWhatsapp.innerText = pousadaWhatsapp;
+        const link = document.getElementById("pousada-whatsapp-link");
+        if (link) {
+            const digits = pousadaWhatsapp.replace(/\D/g, "");
+            link.href = `https://wa.me/${digits}`;
+        }
+    }
 
     const displayFlightLoc = document.getElementById("flight-loc");
     if (displayFlightLoc) displayFlightLoc.innerText = flightLoc;
@@ -1011,4 +992,306 @@ function loadSavedDetails() {
     if (qrRenan) {
         qrRenan.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Participante%3A%20Renan%20Donadeli%20Anhezini%0ACPF%3A%20${cleanCpfRenan}%0AAtalaia%2016%2F07%2F2026%2012%3A30`;
     }
+}
+
+// ================= 5. TIDES & TRAIL CHECKER CONTROLLER =================
+
+const TIDES_DATA = [
+    {
+        day: 10,
+        weekDay: "Sexta-feira",
+        dateLabel: "10 de Julho",
+        moon: "Lua Minguante (20%)",
+        moonIcon: "fa-moon",
+        sunrise: "06:17",
+        sunset: "18:12",
+        tides: [
+            { time: "00:47", height: "1.97", isHigh: true },
+            { time: "07:08", height: "0.58", isHigh: false },
+            { time: "13:21", height: "1.97", isHigh: true },
+            { time: "19:36", height: "0.55", isHigh: false }
+        ],
+        svgPath: "M 0,35 C 13,31 66,82 119,82 C 172,82 195,31 222,31 C 249,31 300,83 327,83 C 354,83 387,50 400,45",
+        svgFillPath: "M 0,35 C 13,31 66,82 119,82 C 172,82 195,31 222,31 C 249,31 300,83 327,83 C 354,83 387,50 400,45 L 400,120 L 0,120 Z",
+        points: [
+            { cx: 13, cy: 31, label: "1.97m", time: "00:47", isHigh: true },
+            { cx: 119, cy: 82, label: "0.58m", time: "07:08", isHigh: false },
+            { cx: 222, cy: 31, label: "1.97m", time: "13:21", isHigh: true },
+            { cx: 327, cy: 83, label: "0.55m", time: "19:36", isHigh: false }
+        ],
+        recommendation: "Pico de maré baixa às 07:08. Ótimo horário para snorkeling e piscinas naturais na Baía dos Porcos ou do Sancho logo cedo."
+    },
+    {
+        day: 11,
+        weekDay: "Sábado",
+        dateLabel: "11 de Julho",
+        moon: "Lua Minguante (12%)",
+        moonIcon: "fa-moon",
+        sunrise: "06:17",
+        sunset: "18:12",
+        tides: [
+            { time: "01:55", height: "2.08", isHigh: true },
+            { time: "08:19", height: "0.44", isHigh: false },
+            { time: "14:32", height: "2.05", isHigh: true },
+            { time: "20:40", height: "0.45", isHigh: false }
+        ],
+        svgPath: "M 0,40 C 15,35 75,87 139,87 C 200,87 215,28 242,28 C 270,28 315,87 344,87 C 370,87 390,60 400,50",
+        svgFillPath: "M 0,40 C 15,35 75,87 139,87 C 200,87 215,28 242,28 C 270,28 315,87 344,87 C 370,87 390,60 400,50 L 400,120 L 0,120 Z",
+        points: [
+            { cx: 32, cy: 27, label: "2.08m", time: "01:55", isHigh: true },
+            { cx: 139, cy: 87, label: "0.44m", time: "08:19", isHigh: false },
+            { cx: 242, cy: 28, label: "2.05m", time: "14:32", isHigh: true },
+            { cx: 344, cy: 87, label: "0.45m", time: "20:40", isHigh: false }
+        ],
+        recommendation: "Maré baixa espetacular (0.44m) às 08:19! Perfeito para as piscinas naturais do Sancho e flutuação em Abreus."
+    },
+    {
+        day: 12,
+        weekDay: "Domingo",
+        dateLabel: "12 de Julho",
+        moon: "Lua Minguante (6%)",
+        moonIcon: "fa-moon",
+        sunrise: "06:17",
+        sunset: "18:12",
+        tides: [
+            { time: "02:57", height: "2.21", isHigh: true },
+            { time: "09:21", height: "0.28", isHigh: false },
+            { time: "15:36", height: "2.15", isHigh: true },
+            { time: "21:42", height: "0.35", isHigh: false }
+        ],
+        svgPath: "M 0,55 C 25,45 80,92 156,92 C 220,92 235,24 260,24 C 285,24 330,90 362,90 C 380,90 395,70 400,65",
+        svgFillPath: "M 0,55 C 25,45 80,92 156,92 C 220,92 235,24 260,24 C 285,24 330,90 362,90 C 380,90 395,70 400,65 L 400,120 L 0,120 Z",
+        points: [
+            { cx: 49, cy: 22, label: "2.21m", time: "02:57", isHigh: true },
+            { cx: 156, cy: 92, label: "0.28m", time: "09:21", isHigh: false },
+            { cx: 260, cy: 24, label: "2.15m", time: "15:36", isHigh: true },
+            { cx: 362, cy: 90, label: "0.35m", time: "21:42", isHigh: false }
+        ],
+        recommendation: "Maré super seca às 09:21 (0.28m). Excelente dia para as piscinas de Caieiras e Buraco da Raquel."
+    },
+    {
+        day: 13,
+        weekDay: "Segunda-feira",
+        dateLabel: "13 de Julho",
+        moon: "Lua Minguante (2%)",
+        moonIcon: "fa-moon",
+        sunrise: "06:17",
+        sunset: "18:12",
+        tides: [
+            { time: "03:57", height: "2.36", isHigh: true },
+            { time: "10:19", height: "0.14", isHigh: false },
+            { time: "16:32", height: "2.26", isHigh: true },
+            { time: "22:34", height: "0.26", isHigh: false }
+        ],
+        svgPath: "M 0,65 C 30,55 90,97 172,97 C 235,97 250,20 276,20 C 300,20 345,93 376,93 C 390,93 398,80 400,75",
+        svgFillPath: "M 0,65 C 30,55 90,97 172,97 C 235,97 250,20 276,20 C 300,20 345,93 376,93 C 390,93 398,80 400,75 L 400,120 L 0,120 Z",
+        points: [
+            { cx: 66, cy: 17, label: "2.36m", time: "03:57", isHigh: true },
+            { cx: 172, cy: 97, label: "0.14m", time: "10:19", isHigh: false },
+            { cx: 276, cy: 20, label: "2.26m", time: "16:32", isHigh: true },
+            { cx: 376, cy: 93, label: "0.26m", time: "22:34", isHigh: false }
+        ],
+        recommendation: "Maré quase zerada (0.14m) às 10:19! O mar estará muito raso, ideal para o snorkel mais nítido da viagem."
+    },
+    {
+        day: 14,
+        weekDay: "Terça-feira",
+        dateLabel: "14 de Julho",
+        moon: "Lua Nova",
+        moonIcon: "fa-circle",
+        sunrise: "06:17",
+        sunset: "18:12",
+        tides: [
+            { time: "04:51", height: "2.48", isHigh: true },
+            { time: "11:12", height: "0.03", isHigh: false },
+            { time: "17:25", height: "2.33", isHigh: true },
+            { time: "23:25", height: "0.20", isHigh: false }
+        ],
+        svgPath: "M 0,75 C 35,65 100,101 187,101 C 250,101 265,18 290,18 C 315,18 360,95 390,95 C 395,95 398,90 400,85",
+        svgFillPath: "M 0,75 C 35,65 100,101 187,101 C 250,101 265,18 290,18 C 315,18 360,95 390,95 C 395,95 398,90 400,85 L 400,120 L 0,120 Z",
+        points: [
+            { cx: 81, cy: 13, label: "2.48m", time: "04:51", isHigh: true },
+            { cx: 187, cy: 101, label: "0.03m", time: "11:12", isHigh: false },
+            { cx: 290, cy: 18, label: "2.33m", time: "17:25", isHigh: true },
+            { cx: 390, cy: 95, label: "0.20m", time: "23:25", isHigh: false }
+        ],
+        recommendation: "Lua Nova! Maré seca absoluta (0.03m) às 11:12. Céu escuro, noite maravilhosa para contemplar estrelas! 🌌"
+    },
+    {
+        day: 15,
+        weekDay: "Quarta-feira",
+        dateLabel: "15 de Julho",
+        moon: "Lua Crescente (1%)",
+        moonIcon: "fa-moon",
+        sunrise: "06:17",
+        sunset: "18:12",
+        tides: [
+            { time: "05:42", height: "2.56", isHigh: true },
+            { time: "12:02", height: "0.00", isHigh: false },
+            { time: "18:14", height: "2.36", isHigh: true }
+        ],
+        svgPath: "M 0,85 C 40,75 110,102 201,102 C 265,102 280,17 304,17 C 330,17 375,98 400,95",
+        svgFillPath: "M 0,85 C 40,75 110,102 201,102 C 265,102 280,17 304,17 C 330,17 375,98 400,95 L 400,120 L 0,120 Z",
+        points: [
+            { cx: 95, cy: 10, label: "2.56m", time: "05:42", isHigh: true },
+            { cx: 201, cy: 102, label: "0.00m", time: "12:02", isHigh: false },
+            { cx: 304, cy: 17, label: "2.36m", time: "18:14", isHigh: true }
+        ],
+        recommendation: "Maré ZERADA às 12:02! Excelente oportunidade para caminhar nas poças da Enseada dos Cações ou Buraco da Raquel."
+    },
+    {
+        day: 16,
+        weekDay: "Quinta-feira",
+        dateLabel: "16 de Julho",
+        moon: "Lua Crescente (4%)",
+        moonIcon: "fa-moon",
+        sunrise: "06:17",
+        sunset: "18:12",
+        tides: [
+            { time: "00:14", height: "0.19", isHigh: false },
+            { time: "06:31", height: "2.58", isHigh: true },
+            { time: "12:51", height: "0.03", isHigh: false },
+            { time: "19:02", height: "2.34", isHigh: true }
+        ],
+        svgPath: "M 0,95 C 5,95 50,9 109,9 C 160,9 175,101 214,101 C 250,101 285,18 317,18 C 345,18 385,85 400,90",
+        svgFillPath: "M 0,95 C 5,95 50,9 109,9 C 160,9 175,101 214,101 C 250,101 285,18 317,18 C 345,18 385,85 400,90 L 400,120 L 0,120 Z",
+        points: [
+            { cx: 2, cy: 95, label: "0.19m", time: "00:14", isHigh: false },
+            { cx: 109, cy: 9, label: "2.58m", time: "06:31", isHigh: true },
+            { cx: 214, cy: 101, label: "0.03m", time: "12:51", isHigh: false },
+            { cx: 317, cy: 18, label: "19:02", isHigh: true }
+        ],
+        recommendation: "Dia de retorno e da flutuação na Atalaia (agendada para as 12:00-13:30, casando perfeitamente com a maré baixa)."
+    }
+];
+
+function initTides() {
+    const container = document.getElementById("tides-cards-container");
+    if (!container) return;
+    container.innerHTML = "";
+
+    TIDES_DATA.forEach(day => {
+        let tideListHTML = "";
+        day.tides.forEach(t => {
+            tideListHTML += `
+                <div class="tide-list-item ${t.isHigh ? 'high-tide' : 'low-tide'}" style="padding: 6px; border-radius: 8px; background: ${t.isHigh ? 'rgba(0, 180, 216, 0.08)' : 'rgba(255, 107, 74, 0.08)'}; border: 1px solid ${t.isHigh ? 'rgba(0, 180, 216, 0.15)' : 'rgba(255, 107, 74, 0.15)'}; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <span style="font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: ${t.isHigh ? 'var(--turquoise-dark)' : 'var(--sunset)'}; margin-bottom: 2px;">
+                        ${t.isHigh ? '<i class="fa-solid fa-arrow-trend-up"></i> Alta' : '<i class="fa-solid fa-arrow-trend-down"></i> Baixa'}
+                    </span>
+                    <strong style="font-size: 0.85rem; color: var(--text-primary);">${t.height}m</strong>
+                    <span class="time" style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 1px; font-weight: 500;">${t.time}</span>
+                </div>
+            `;
+        });
+
+        let pointsHTML = "";
+        day.points.forEach(pt => {
+            const isHigh = pt.isHigh;
+            pointsHTML += `
+                <circle cx="${pt.cx}" cy="${pt.cy}" r="4.5" fill="${isHigh ? 'var(--turquoise-dark)' : 'var(--sunset)'}" stroke="#ffffff" stroke-width="1.5" />
+                <text x="${pt.cx}" y="${isHigh ? pt.cy - 10 : pt.cy + 13}" font-size="9.5" fill="${isHigh ? 'var(--turquoise-dark)' : 'var(--sunset)'}" text-anchor="middle" font-weight="700">${pt.label}</text>
+                <text x="${pt.cx}" y="${isHigh ? pt.cy + 13 : pt.cy - 7}" font-size="8" fill="var(--text-secondary)" text-anchor="middle" font-weight="500">${pt.time}</text>
+            `;
+        });
+
+        const card = document.createElement("div");
+        card.className = "tide-day-card app-glass-card";
+        card.style.cssText = "padding: 16px; margin-bottom: 8px;";
+        card.innerHTML = `
+            <div class="tide-card-header" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;">
+                <div class="tide-day-title" style="display: flex; align-items: center; gap: 12px;">
+                    <span class="day-num-small" style="background: var(--turquoise-gradient); color: #ffffff; width: 36px; height: 36px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 700; font-size: 0.95rem; flex-shrink: 0;">${day.day}</span>
+                    <div>
+                        <strong style="font-size: 0.95rem; display: block; color: var(--text-primary); font-family: var(--font-body); font-weight: 600;">${day.weekDay}, ${day.dateLabel}</strong>
+                        <span class="moon-badge" style="font-size: 0.72rem; color: var(--gold-dark); font-weight: 600; display: inline-flex; align-items: center; gap: 4px; margin-top: 2px;"><i class="fa-solid ${day.moonIcon}"></i> ${day.moon}</span>
+                    </div>
+                </div>
+                <div class="tide-sun-times" style="font-size: 0.7rem; color: var(--text-secondary); text-align: right; display: flex; flex-direction: column; gap: 2px;">
+                    <span><i class="fa-solid fa-sun-up" style="color: var(--gold-dark);"></i> Nascer: ${day.sunrise}</span>
+                    <span><i class="fa-solid fa-sun-down" style="color: var(--turquoise-medium);"></i> Ocaso: ${day.sunset}</span>
+                </div>
+            </div>
+            
+            <div class="tide-wave-container" style="background: rgba(255, 255, 255, 0.4); border-radius: 12px; padding: 10px; border: 1px solid var(--glass-border); margin: 12px 0; position: relative;">
+                <svg viewBox="0 0 400 120" style="width: 100%; height: auto; display: block; overflow: visible;">
+                    <defs>
+                        <linearGradient id="tide-fill-grad-${day.day}" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="var(--turquoise-medium)" stop-opacity="0.35"/>
+                            <stop offset="100%" stop-color="var(--turquoise-light)" stop-opacity="0.01"/>
+                        </linearGradient>
+                        <linearGradient id="tide-line-grad-${day.day}" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stop-color="var(--turquoise-dark)"/>
+                            <stop offset="50%" stop-color="var(--turquoise-medium)"/>
+                            <stop offset="100%" stop-color="var(--turquoise-dark)"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Shading daylight hours (06:17 to 18:12) -->
+                    <!-- Daylight width is roughly 50% of the day. Map: 06:17 -> X=105, 18:12 -> X=303 -->
+                    <rect x="105" y="5" width="198" height="110" fill="rgba(253, 218, 13, 0.04)" rx="4" />
+                    <line x1="105" y1="5" x2="105" y2="115" stroke="rgba(253, 218, 13, 0.2)" stroke-dasharray="2,2" />
+                    <line x1="303" y1="5" x2="303" y2="115" stroke="rgba(253, 218, 13, 0.2)" stroke-dasharray="2,2" />
+                    <text x="204" y="15" font-size="7.5" fill="var(--gold-dark)" text-anchor="middle" font-weight="600" opacity="0.6">Período Diurno (Sol)</text>
+                    
+                    <path d="${day.svgPath}" fill="none" stroke="url(#tide-line-grad-${day.day})" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="${day.svgFillPath}" fill="url(#tide-fill-grad-${day.day})"/>
+                    
+                    ${pointsHTML}
+                </svg>
+            </div>
+            
+            <div class="tide-grid-container" style="display: grid; grid-template-columns: repeat(${day.tides.length}, 1fr); gap: 8px; margin-bottom: 12px; text-align: center;">
+                ${tideListHTML}
+            </div>
+
+            <div class="tide-recommendation" style="font-size: 0.8rem; border-top: 1px dashed var(--glass-border); padding-top: 10px; color: var(--text-primary); display: flex; gap: 8px; align-items: flex-start; line-height: 1.35;">
+                <i class="fa-solid fa-circle-info text-turquoise" style="margin-top: 2px; flex-shrink: 0; font-size: 0.85rem;"></i>
+                <span><strong>Dica:</strong> ${day.recommendation}</span>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+function checkTrailAvailability() {
+    const banner = document.getElementById("trail-checker-banner");
+    const icon = document.getElementById("trail-status-icon");
+    const title = document.getElementById("trail-status-title");
+    const time = document.getElementById("trail-status-time");
+    
+    if (!banner) return;
+    
+    fetch("trail_alerts.json")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("No alert file found");
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.last_checked) {
+                time.innerText = `Última verificação: ${data.last_checked}`;
+            }
+            
+            if (data.alerts && data.alerts.length > 0) {
+                banner.style.borderLeftColor = "var(--sunset)";
+                banner.style.background = "rgba(255, 107, 74, 0.08)";
+                icon.className = "fa-solid fa-triangle-exclamation text-sunset";
+                icon.style.animation = "pulse 1.5s infinite";
+                
+                let alertTexts = data.alerts.map(a => `${a.trail} (${a.slots} vagas em ${a.date} ${a.time})`);
+                title.innerHTML = `<span class="text-sunset" style="font-weight: 700;">🚨 VAGAS ENCONTRADAS!</span> ${alertTexts.join(", ")}`;
+            } else {
+                banner.style.borderLeftColor = "var(--emerald)";
+                banner.style.background = "rgba(16, 185, 129, 0.04)";
+                icon.className = "fa-solid fa-circle-check text-emerald";
+                title.innerText = "🟢 Monitoramento de trilhas ativo (nenhuma vaga disponível no momento)";
+            }
+        })
+        .catch(err => {
+            console.log("Trail alerts not fetched:", err);
+            banner.style.borderLeftColor = "var(--turquoise-medium)";
+            icon.className = "fa-solid fa-circle-info text-turquoise";
+            title.innerText = "🟢 Monitoramento de trilhas ativo (checado em background)";
+        });
 }

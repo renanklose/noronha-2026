@@ -1,21 +1,21 @@
 /* ================= GLOBAL DESIGN SYSTEM ================= */
 :root {
-    --bg-primary: #f2f7f9; /* Warm beach sand/water hue */
+    --bg-primary: #f5fafd; /* Bright seawater tint background */
     --bg-secondary: #ffffff;
-    --text-primary: #032b43; /* Deep oceanic blue */
-    --text-secondary: #537a93; /* Slate/Teal water */
+    --text-primary: #022a42; /* Deep oceanic blue */
+    --text-secondary: #4a7791; /* Slate water blue */
     
     /* Noronha Ocean Gradient Palette */
-    --turquoise-light: #e0f7fa;
+    --turquoise-light: #e0f7fc;
     --turquoise-medium: #00b4d8;
-    --turquoise-dark: #0077b6;
-    --turquoise-gradient: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+    --turquoise-dark: #006b99;
+    --turquoise-gradient: linear-gradient(135deg, #00f0ff 0%, #00b4d8 50%, #0077b6 100%);
     
-    /* Noronha Gold Details */
-    --gold: #caa252;
-    --gold-dark: #a98033;
-    --gold-light: #fdfaf2;
-    --gold-gradient: linear-gradient(135deg, #e5c158 0%, #caa252 100%);
+    /* Noronha Gold Details (Metallic / Shiny) */
+    --gold: #b38728;
+    --gold-dark: #8e5c19;
+    --gold-light: #fffdf5;
+    --gold-gradient: linear-gradient(135deg, #c5a059 0%, #fef1c9 25%, #b38728 50%, #fdf5d6 75%, #966f28 100%);
     
     /* Accents */
     --sunset: #ff6b4a; /* Orange coral */
@@ -34,7 +34,7 @@
     /* Shadows & Transitions */
     --shadow-premium: 0 12px 35px -10px rgba(0, 119, 182, 0.1), 0 4px 15px -3px rgba(0, 0, 0, 0.03);
     --shadow-glow: 0 8px 25px rgba(0, 180, 216, 0.25);
-    --shadow-gold-glow: 0 8px 25px rgba(202, 162, 82, 0.25);
+    --shadow-gold-glow: 0 8px 25px rgba(179, 135, 40, 0.25);
     
     --radius-lg: 24px;
     --radius-md: 16px;
@@ -592,16 +592,18 @@ button {
 }
 
 .badge-gold {
-    background: var(--gold-light);
-    color: var(--gold-dark);
+    background: var(--gold-gradient);
+    color: #ffffff;
     font-size: 0.7rem;
     font-weight: 700;
     padding: 4px 10px;
     border-radius: 30px;
-    border: 1px solid rgba(202, 162, 82, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 2px 6px rgba(179, 135, 40, 0.2);
     text-transform: uppercase;
     display: inline-block;
     margin-bottom: 8px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
 }
 
 .pass-top h4 {
@@ -1209,6 +1211,7 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .accordion-item.active .day-num {
